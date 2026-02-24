@@ -13,7 +13,6 @@ body {
 /* ================= LINKS RESET ================= */
 
 a {
-  text-decoration: none;
   color: inherit;
 }
 
@@ -407,10 +406,7 @@ a:active {
   color: #8b5e3c;
 }
 
-.item-contacto a {
-  color: #333 !important;
-  font-weight: 600;
-}
+
 
 /* ================= FOOTER ================= */
 
@@ -502,31 +498,32 @@ a:active {
   }
 }
 
-/* ================= FIX LINKS Y BOTONES CONTACTO ================= */
-
-.item-contacto {
-  cursor: pointer;
-}
-
-/* Links dentro de botones */
-.item-contacto a {
+.info-contacto a.item-contacto {
   text-decoration: none !important;
   color: #333 !important;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-/* Evitar subrayados en hover y visited */
-.item-contacto a:hover,
-.item-contacto a:visited,
-.item-contacto a:active {
-  text-decoration: none !important;
+.info-contacto a.item-contacto span {
+  color: #333 !important;
+}
+
+/* Estados del navegador */
+.info-contacto a.item-contacto:visited,
+.info-contacto a.item-contacto:active {
+  color: #333 !important;
+}
+
+/* Hover elegante */
+.info-contacto a.item-contacto:hover {
   color: #8b5e3c !important;
 }
 
-/* Reset global más seguro */
-a {
-  text-decoration: none;
+/* Iconos */
+.info-contacto a.item-contacto i {
+  color: #8b5e3c;
+}
+
+/* Cursor */
+.info-contacto a.item-contacto {
+  cursor: pointer;
 }
