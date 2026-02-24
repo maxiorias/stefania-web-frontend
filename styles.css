@@ -223,7 +223,7 @@ a {
   filter: invert(40%) sepia(20%) saturate(1000%) hue-rotate(330deg) brightness(80%);
 }
 
-/* ================= PARALLAX (INTOCABLE ⭐) ================= */
+/* ================= PARALLAX ================= */
 
 .parallax {
   background-image: url("./images/Gemini_Generated_Image_l1oo6rl1oo6rl1oo.png");
@@ -246,17 +246,15 @@ a {
   padding: 100px 20px;
 }
 
-/* Overlay pero SIN bloquear clicks */
 .parallax::before {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.45);
   z-index: 0;
-  pointer-events: none; /* ⭐ ESTO ES CLAVE */
+  pointer-events: none;
 }
 
-/* Contenido arriba del overlay */
 .parallax h2,
 .parallax p,
 .parallax form,
@@ -281,13 +279,12 @@ a {
   color: #8b5e3c !important;
 }
 
-/* Evitar azul de navegador */
 a:visited,
 a:active {
   color: inherit;
 }
 
-/* ================= FORMULARIO PRO ================= */
+/* ================= FORMULARIO ================= */
 
 .form-contacto {
   background: rgba(255,255,255,0.97);
@@ -367,7 +364,7 @@ a:active {
   transform: scale(1.03);
 }
 
-/* ================= CONTACTO BOTONES PRO ⭐ ================= */
+/* ================= CONTACTO BOTONES ================= */
 
 .info-contacto {
   display: flex;
@@ -513,7 +510,7 @@ a:active {
   color: #333 !important;
 }
 
-/* Hover elegante */
+/* Hover */
 .info-contacto a.item-contacto:hover {
   color: #8b5e3c !important;
 }
