@@ -524,3 +524,30 @@ a:active {
 .info-contacto a.item-contacto {
   cursor: pointer;
 }
+
+/* ===== FIX MOBILE MENU WIDTH ===== */
+
+@media (max-width: 768px) {
+
+  .navbar ul {
+    width: calc(100% - 30px);
+    left: 15px;
+    right: 15px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+}
+
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none !important;
+  color: inherit;
+}
