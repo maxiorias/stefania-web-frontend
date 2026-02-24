@@ -10,26 +10,27 @@ body {
   background-color: #fdf6e3;
 }
 
-/* ================= NAVBAR ================= */
-
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
+  padding: 10px 20px;
   background-color: #fdf6e3;
+  box-shadow: 0 2px 5px rgba(0,0,0,0);
 }
 
 .navbar .logo img {
-  height: 90px;
+  height: 100px;
   width: auto;
-  object-fit: contain;
 }
 
+/* Links desktop */
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 50px;
+  margin: 20px;
 }
 
 .navbar ul li a {
@@ -43,7 +44,18 @@ body {
   color: #6c4324;
 }
 
-/* ================= INICIO ================= */
+/* ================= HAMBURGUESA ================= */
+
+.menu-toggle {
+  display: none;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #8b5e3c;
+  cursor: pointer;
+}
+
+/* ================= SECCIÓN INICIO ================= */
 
 .inicio {
   display: flex;
@@ -59,7 +71,7 @@ body {
 }
 
 .inicio-texto h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: #333;
   margin-bottom: 15px;
 }
@@ -76,7 +88,7 @@ body {
   background-color: #8b5e3c;
   color: #fff;
   text-decoration: none;
-  border-radius: 6px;
+  border-radius: 5px;
 }
 
 .btn:hover {
@@ -89,8 +101,7 @@ body {
   border: 3px solid #8b5e3c;
 }
 
-/* ================= SOBRE MI ================= */
-
+/* Sobre mí */
 .sobre-mi {
   padding: 80px 20px;
   background-color: #fff8f0;
@@ -99,15 +110,17 @@ body {
 
 .sobre-mi h2 {
   font-size: 2.2rem;
+  color: #333;
   margin-bottom: 50px;
 }
 
+/* Trayectoria */
 .trayectoria {
   display: flex;
   flex-direction: column;
   gap: 60px;
   max-width: 1000px;
-  margin: auto;
+  margin: 0 auto;
 }
 
 .trayectoria-item {
@@ -115,14 +128,16 @@ body {
   align-items: center;
   gap: 30px;
   flex-wrap: wrap;
+  text-align: left;
 }
 
 .trayectoria-item img {
   width: 400px;
   height: 220px;
-  border-radius: 12px;
+  border-radius: 10px;
   object-fit: cover;
   box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  border: 3px solid #8b5e3c3b;
 }
 
 .trayectoria-item .texto {
@@ -135,125 +150,163 @@ body {
   margin-bottom: 10px;
 }
 
+.trayectoria-item .texto p {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
 .trayectoria-item:nth-child(even) {
   flex-direction: row-reverse;
 }
 
-/* ================= CAROUSEL ================= */
+/* Responsive trayectoria */
+@media (max-width: 768px) {
+  .trayectoria-item {
+    flex-direction: column;
+    text-align: center;
+  }
 
+  .trayectoria-item:nth-child(even) {
+    flex-direction: column;
+  }
+}
+
+/* Carousel */
 #servicios {
   background-color: #fdf6e3;
   padding: 80px 20px;
 }
 
+#servicios h2 {
+  font-size: 2.2rem;
+  color: #333;
+  margin-bottom: 50px;
+}
+
 .carousel-item {
   padding: 30px 0;
-  min-height: 420px;
+  min-height: 450px;
 }
 
 .carousel-item h3 {
   color: #8b5e3c;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.carousel-item p {
+  color: #555;
+  line-height: 1.6;
 }
 
 .carousel-item img {
   max-height: 350px;
   object-fit: cover;
+  border: 1px solid #ddd;
 }
 
-/* ================= PARALLAX ================= */
+.carousel-indicators [data-bs-target] {
+  background-color: #8b5e3c;
+  opacity: 0.5;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(40%) sepia(20%) saturate(1000%) hue-rotate(330deg) brightness(80%);
+}
+
+/* Parallax (NO MODIFICADO COMO PEDISTE ⭐) */
 
 .parallax {
   background-image: url("./images/Gemini_Generated_Image_l1oo6rl1oo6rl1oo.png");
   background-attachment: fixed;
-  background-position: center;
+  background-position: center center;
+  background-repeat: no-repeat;
   background-size: cover;
   color: #fff;
   position: relative;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   padding: 100px 20px;
 }
 
-/* Overlay */
 .parallax::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 0;
 }
 
-.parallax > * {
+.parallax h2,
+.parallax p,
+.parallax a,
+.parallax form {
   position: relative;
   z-index: 1;
 }
 
-/* ❗ DESACTIVAR PARALLAX EN MOBILE */
-@media (max-width: 768px) {
-  .parallax {
-    background-attachment: scroll;
-    min-height: auto;
-  }
-}
-
-/* ================= FORM ================= */
-
-.form-contacto {
-  background: rgba(255,255,255,0.95);
+.parallax .form-contacto {
+  background-color: rgba(255, 255, 255, 0.9);
   color: #333;
   max-width: 600px;
   width: 90%;
   padding: 40px;
-  border-radius: 18px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
-.form-contacto h3 {
-  text-align: center;
-  margin-bottom: 25px;
-}
-
-.form-contacto input,
-.form-contacto textarea {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #d1bfa7;
-  margin-top: 8px;
-  background: #faf8f5;
-}
-
-.form-contacto button {
-  width: 100%;
-  padding: 14px;
+.parallax .form-contacto button {
   background-color: #8b5e3c;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  padding: 14px;
+  width: 100%;
 }
 
-/* ================= CONTACT INFO ================= */
+.parallax .form-contacto button:hover {
+  background-color: #6d4a30;
+}
 
+/* Formulario contacto */
+.form-contacto {
+  background: rgba(255,255,255,0.9);
+  color: #333;
+  max-width: 600px;
+  width: 90%;
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.25);
+}
+
+/* Contacto info */
 .info-contacto {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   align-items: center;
-  margin-bottom: 80px;
+  gap: 18px;
+  margin-bottom: 100px;
 }
 
 .item-contacto {
   display: flex;
-  gap: 10px;
   align-items: center;
-  background: rgba(255,255,255,0.9);
+  gap: 10px;
+  background-color: rgba(255,255,255,0.9);
   padding: 12px 20px;
   border-radius: 12px;
 }
 
-/* ================= FOOTER ================= */
-
+/* Footer */
 .footer {
   background-color: #6d4a30;
   color: #fdf6e3;
@@ -262,43 +315,15 @@ body {
 
 .footer-content {
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  text-align: center;
   gap: 30px;
+  text-align: center;
 }
 
-.footer-col a {
-  color: #ccc;
-  text-decoration: none;
-}
-
-/* ================= RESPONSIVE GENERAL ================= */
-
-@media (max-width: 768px) {
-
-  .navbar {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-
-  .navbar ul {
-    flex-direction: column;
-    gap: 15px;
-    padding: 0;
-  }
-
-  .trayectoria-item {
-    flex-direction: column !important;
-    text-align: center;
-  }
-
-}
-
+/* Mobile Footer */
 @media (min-width: 768px) {
-
   .footer-content {
     flex-direction: row;
     justify-content: space-between;
@@ -308,5 +333,34 @@ body {
   .footer-col {
     width: 30%;
   }
+}
 
+/* ================= MOBILE NAVBAR ================= */
+
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fdf6e3;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+    z-index: 999;
+  }
+
+  .navbar ul.active {
+    display: flex;
+  }
+
+  .navbar .logo img {
+    height: 80px;
+  }
 }

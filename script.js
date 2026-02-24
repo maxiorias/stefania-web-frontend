@@ -118,3 +118,12 @@ form.addEventListener("submit", async (e) => {
   btn.disabled = false;
   btn.innerText = "Enviar";
 });
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".navbar ul");
+
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
+  });
+}
