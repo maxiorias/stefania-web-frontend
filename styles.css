@@ -464,3 +464,28 @@ a {
     height: 80px;
   }
 }
+
+/* ================= LINKS Y BOTONES CONTACTO FIX ================= */
+
+.item-contacto a {
+  color: #333 !important;
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: color 0.3s ease;
+}
+
+.item-contacto a:hover {
+  color: #8b5e3c !important;
+}
+
+
+
+a:visited {
+  color: inherit;
+}
+
+
+
+.item-contacto i {
+  pointer-events: none;
+}
