@@ -364,3 +364,28 @@ body {
     height: 80px;
   }
 }
+
+/* ================= RESET DE LINKS ================= */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ================= FORMULARIO FIX ================= */
+
+.form-contacto {
+  color: #333; 
+}
+
+
+.parallax .form-contacto {
+  color: #333;
+}
+
+/* Inputs y textarea */
+.form-contacto input,
+.form-contacto textarea {
+  width: 100%;
+  color: #333;
+}
