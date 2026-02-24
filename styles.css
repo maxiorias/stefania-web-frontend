@@ -224,7 +224,7 @@ a {
   filter: invert(40%) sepia(20%) saturate(1000%) hue-rotate(330deg) brightness(80%);
 }
 
-/* ================= PARALLAX ================= */
+/* ================= PARALLAX (INTOCABLE ⭐) ================= */
 
 .parallax {
   background-image: url("./images/Gemini_Generated_Image_l1oo6rl1oo6rl1oo.png");
@@ -235,6 +235,7 @@ a {
 
   color: #fff;
   position: relative;
+
   min-height: 100vh;
 
   display: flex;
@@ -263,7 +264,7 @@ a {
 /* ================= FORMULARIO PRO ================= */
 
 .form-contacto {
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.97);
 
   color: #333;
 
@@ -271,14 +272,14 @@ a {
   width: 90%;
   padding: 40px 35px;
 
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  border-radius: 22px;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
 
   transition: all 0.3s ease;
 }
 
 .form-contacto:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
 }
 
 .form-contacto h3 {
@@ -291,17 +292,17 @@ a {
   display: block;
   margin-top: 15px;
   color: #444;
+  font-weight: 600;
 }
 
 .form-contacto input,
 .form-contacto textarea {
   width: 100%;
   padding: 12px 15px;
-
   margin-top: 6px;
 
   border: 1px solid #d1bfa7;
-  border-radius: 10px;
+  border-radius: 12px;
 
   background-color: #faf8f5;
   color: #333;
@@ -326,25 +327,27 @@ a {
   color: white;
 
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
 
   cursor: pointer;
+
+  font-weight: bold;
 
   transition: all 0.3s ease;
 }
 
 .form-contacto button:hover {
   background-color: #6d4a30;
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-/* ================= CONTACTO INFO ================= */
+/* ================= CONTACTO BOTONES PRO ⭐ ================= */
 
 .info-contacto {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
 
   margin-bottom: 100px;
 }
@@ -354,25 +357,32 @@ a {
   align-items: center;
   gap: 12px;
 
-  padding: 14px 22px;
+  padding: 16px 24px;
 
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.98);
 
-  border-radius: 14px;
+  border-radius: 16px;
 
-  box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 
   transition: all 0.3s ease;
+
+  cursor: pointer;
 }
 
 .item-contacto:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.2);
 }
 
 .item-contacto i {
   font-size: 1.4em;
   color: #8b5e3c;
+}
+
+.item-contacto a {
+  color: #333 !important;
+  font-weight: 600;
 }
 
 /* ================= FOOTER ================= */
@@ -464,25 +474,5 @@ a {
     height: 80px;
   }
 }
-
-/* ================= LINKS Y BOTONES CONTACTO FIX ================= */
-
-.item-contacto a {
-  color: #333 !important;
-  font-weight: 600;
-  text-decoration: none !important;
-  transition: color 0.3s ease;
-}
-
-.item-contacto a:hover {
-  color: #8b5e3c !important;
-}
-
-
-
-a:visited {
-  color: inherit;
-}
-
 
 
