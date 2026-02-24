@@ -247,18 +247,45 @@ a {
   padding: 100px 20px;
 }
 
+/* Overlay pero SIN bloquear clicks */
 .parallax::before {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.45);
+  z-index: 0;
+  pointer-events: none; /* ⭐ ESTO ES CLAVE */
 }
 
+/* Contenido arriba del overlay */
 .parallax h2,
 .parallax p,
-.parallax form {
+.parallax form,
+.parallax .info-contacto {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+}
+
+/* ================= BOTONES CONTACTO FIX ================= */
+
+.item-contacto {
+  cursor: pointer;
+}
+
+.item-contacto a {
+  text-decoration: none !important;
+  color: #333 !important;
+  font-weight: 600;
+}
+
+.item-contacto a:hover {
+  color: #8b5e3c !important;
+}
+
+/* Evitar azul de navegador */
+a:visited,
+a:active {
+  color: inherit;
 }
 
 /* ================= FORMULARIO PRO ================= */
