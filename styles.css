@@ -1,5 +1,4 @@
-/* ================= RESET ================= */
-
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -14,14 +13,6 @@ body {
 /* ================= LINKS RESET ================= */
 
 a {
-  text-decoration: none !important;
-  color: inherit;
-}
-
-a:hover,
-a:visited,
-a:active {
-  text-decoration: none !important;
   color: inherit;
 }
 
@@ -33,8 +24,6 @@ a:active {
   align-items: center;
   padding: 10px 20px;
   background-color: #FBF3E4;
-  position: relative;
-  z-index: 1000;
 }
 
 .navbar .logo img {
@@ -175,6 +164,17 @@ a:active {
   flex-direction: row-reverse;
 }
 
+@media (max-width: 768px) {
+  .trayectoria-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .trayectoria-item:nth-child(even) {
+    flex-direction: column;
+  }
+}
+
 /* ================= CAROUSEL ================= */
 
 #servicios {
@@ -209,12 +209,27 @@ a:active {
   border: 1px solid #ddd;
 }
 
+.carousel-indicators [data-bs-target] {
+  background-color: #8b5e3c;
+  opacity: 0.5;
+}
+
+.carousel-indicators .active {
+  opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(40%) sepia(20%) saturate(1000%) hue-rotate(330deg) brightness(80%);
+}
+
 /* ================= PARALLAX ================= */
 
 .parallax {
   background-image: url("./images/Gemini_Generated_Image_l1oo6rl1oo6rl1oo.png");
   background-attachment: fixed;
   background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
 
   color: #fff;
@@ -236,6 +251,7 @@ a:active {
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.45);
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -247,10 +263,32 @@ a:active {
   z-index: 2;
 }
 
-/* ================= FORM ================= */
+/* ================= BOTONES CONTACTO FIX ================= */
+
+.item-contacto {
+  cursor: pointer;
+}
+
+.item-contacto a {
+  text-decoration: none !important;
+  color: #333 !important;
+  font-weight: 600;
+}
+
+.item-contacto a:hover {
+  color: #8b5e3c !important;
+}
+
+a:visited,
+a:active {
+  color: inherit;
+}
+
+/* ================= FORMULARIO ================= */
 
 .form-contacto {
   background: rgba(255,255,255,0.97);
+
   color: #333;
 
   max-width: 600px;
@@ -276,8 +314,8 @@ a:active {
 .form-contacto label {
   display: block;
   margin-top: 15px;
-  font-weight: 600;
   color: #444;
+  font-weight: 600;
 }
 
 .form-contacto input,
@@ -290,6 +328,40 @@ a:active {
   border-radius: 12px;
 
   background-color: #faf8f5;
+  color: #333;
+
+  transition: all 0.3s ease;
+}
+
+.form-contacto input:focus,
+.form-contacto textarea:focus {
+  border-color: #8b5e3c;
+  box-shadow: 0 0 10px rgba(139,94,60,0.25);
+  outline: none;
+}
+
+.form-contacto button {
+  width: 100%;
+  margin-top: 25px;
+
+  padding: 14px;
+
+  background-color: #8b5e3c;
+  color: white;
+
+  border: none;
+  border-radius: 12px;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+  transition: all 0.3s ease;
+}
+
+.form-contacto button:hover {
+  background-color: #6d4a30;
+  transform: scale(1.03);
 }
 
 /* ================= CONTACTO BOTONES ================= */
@@ -299,6 +371,7 @@ a:active {
   flex-wrap: wrap;
   justify-content: center;
   gap: 25px;
+
   margin-bottom: 100px;
 }
 
@@ -330,6 +403,8 @@ a:active {
   color: #8b5e3c;
 }
 
+
+
 /* ================= FOOTER ================= */
 
 .footer {
@@ -345,10 +420,48 @@ a:active {
   display: flex;
   flex-direction: column;
   gap: 30px;
+
   text-align: center;
 }
 
-/* ================= MOBILE ================= */
+.footer-col h4 {
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(253,246,227,0.2);
+  padding-bottom: 5px;
+}
+
+.footer-col p,
+.footer-col a {
+  color: #ccc;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.footer-col a:hover {
+  color: #a16b4a;
+}
+
+.social-icons a {
+  font-size: 1.5em;
+  margin: 0 10px;
+}
+
+/* Footer desktop */
+
+@media (min-width: 768px) {
+
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+
+  .footer-col {
+    width: 30%;
+  }
+}
+
+/* ================= MOBILE NAVBAR ================= */
 
 @media (max-width: 768px) {
 
@@ -358,23 +471,19 @@ a:active {
 
   .navbar ul {
     position: absolute;
+    top: 100%;
+    left: 0;
 
-    top: 110%;
-    left: 20px;
-
-    width: calc(100% - 40px);
-
-    background: #FBF3E4;
+    width: 100%;
+    background: #fdf6e3;
 
     flex-direction: column;
     text-align: center;
 
-    padding: 25px 0;
+    padding: 20px 0;
 
     display: none;
-
-    border-radius: 14px;
-    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    z-index: 999;
   }
 
   .navbar ul.active {
@@ -384,4 +493,66 @@ a:active {
   .navbar .logo img {
     height: 80px;
   }
+}
+
+.info-contacto a.item-contacto {
+  text-decoration: none !important;
+  color: #333 !important;
+}
+
+.info-contacto a.item-contacto span {
+  color: #333 !important;
+}
+
+/* Estados del navegador */
+.info-contacto a.item-contacto:visited,
+.info-contacto a.item-contacto:active {
+  color: #333 !important;
+}
+
+/* Hover */
+.info-contacto a.item-contacto:hover {
+  color: #8b5e3c !important;
+}
+
+/* Iconos */
+.info-contacto a.item-contacto i {
+  color: #8b5e3c;
+}
+
+/* Cursor */
+.info-contacto a.item-contacto {
+  cursor: pointer;
+}
+
+/* ===== FIX MOBILE MENU WIDTH ===== */
+
+@media (max-width: 768px) {
+
+  .navbar ul {
+    width: calc(100% - 40px);
+    left: 20px;
+    right: 20px;
+
+    top: 110%;
+
+
+    border-radius: 14px;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    padding: 25px 0;
+  }
+
+}
+
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+a:hover,
+a:visited,
+a:active {
+  text-decoration: none !important;
+  color: inherit;
 }
