@@ -20,7 +20,7 @@ function updateCounter() {
 }
 
 // ---------------------------
-// Mostrar mensajes en pantalla
+// Mostrar mensajes
 // ---------------------------
 
 function showMessage(text, color) {
@@ -53,7 +53,7 @@ function validateForm(nombre, email, mensaje) {
 }
 
 // ---------------------------
-// Envío del formulario (PRODUCTION READY)
+// Envío formulario
 // ---------------------------
 
 form.addEventListener("submit", async (e) => {
@@ -79,8 +79,6 @@ form.addEventListener("submit", async (e) => {
 
   try {
     const controller = new AbortController();
-
-    // Timeout de 20 segundos (Render puede tardar en despertar)
     const timeout = setTimeout(() => controller.abort(), 20000);
 
     const res = await fetch(
@@ -90,7 +88,11 @@ form.addEventListener("submit", async (e) => {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ nombre, email, mensaje }),
+        body: JSON.stringify({
+          nombre,
+          email,
+          mensaje
+        }),
         signal: controller.signal
       }
     );
