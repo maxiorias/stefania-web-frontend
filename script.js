@@ -74,7 +74,7 @@ form.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/enviar", {
+    const res = await fetch("https://stefania-web-backend.onrender.com/enviar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ nombre, email, mensaje })
