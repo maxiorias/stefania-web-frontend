@@ -475,4 +475,31 @@ a {
   }
 }
 
+/* ================= FIX LINKS Y BOTONES CONTACTO ================= */
 
+.item-contacto {
+  cursor: pointer;
+}
+
+/* Links dentro de botones */
+.item-contacto a {
+  text-decoration: none !important;
+  color: #333 !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Evitar subrayados en hover y visited */
+.item-contacto a:hover,
+.item-contacto a:visited,
+.item-contacto a:active {
+  text-decoration: none !important;
+  color: #8b5e3c !important;
+}
+
+/* Reset global más seguro */
+a {
+  text-decoration: none;
+}
