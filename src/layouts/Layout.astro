@@ -2,14 +2,59 @@
 import '../styles/global.css';
 import { persona } from '../data/sitio';
 
-const titulo = `Evaluación psicopedagógica y neurocognitiva en Trelew y Puerto Madryn · ${persona.nombre}`;
+interface Props {
+  // JSON-LD extra de la página (ej. FAQPage)
+  esquemas?: object[];
+}
+const { esquemas = [] } = Astro.props;
+
+// Título corto (Google corta ~60 caracteres) con la búsqueda más probable: "psicopedagoga Trelew"
+const titulo = 'Psicopedagoga en Trelew y Puerto Madryn · Stefania Alberti';
 const descripcion =
-  'Lic. en Psicopedagogía con más de 8 años en neurorehabilitación. Evaluación neurocognitiva, Escalas de Wechsler, diagnóstico y tratamiento psicopedagógico en Trelew y Puerto Madryn, Chubut.';
-const canonica = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+  'Evaluación neurocognitiva y psicopedagógica en Trelew y Puerto Madryn. Escalas de Wechsler, evaluación para CUD, diagnóstico y tratamiento. +8 años de experiencia.';
+const base = Astro.site ?? Astro.url;
+const canonica = new URL(Astro.url.pathname, base).href;
+const imagenOg = new URL('/og.jpg', base).href;
+
+// Datos estructurados: le dicen a Google quién es, qué hace y dónde atiende
+const negocio = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': `${canonica}#stefania`,
+      name: persona.nombre,
+      honorificPrefix: 'Mgtr. Lic.',
+      jobTitle: 'Licenciada en Psicopedagogía',
+      image: imagenOg,
+      url: canonica,
+      telephone: `+${persona.whatsapp}`,
+      email: persona.email,
+      sameAs: [persona.instagram, persona.linkedin],
+      alumniOf: ['Universidad Provincial de Córdoba', 'Universidad Nacional de San Martín'],
+      knowsAbout: ['Evaluación neurocognitiva', 'Psicopedagogía', 'Escalas de Wechsler', 'Neurorehabilitación', 'Orientación vocacional', 'Educación inclusiva'],
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${canonica}#consultorio`,
+      name: `${persona.titulo} · Psicopedagoga`,
+      description: descripcion,
+      url: canonica,
+      image: imagenOg,
+      telephone: `+${persona.whatsapp}`,
+      email: persona.email,
+      founder: { '@id': `${canonica}#stefania` },
+      address: { '@type': 'PostalAddress', addressLocality: 'Trelew', addressRegion: 'Chubut', addressCountry: 'AR' },
+      areaServed: persona.sedes.map((s) => ({ '@type': 'City', name: s.ciudad })),
+      sameAs: [persona.instagram, persona.linkedin],
+      knowsLanguage: 'es',
+    },
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es-AR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,6 +69,15 @@ const canonica = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:url" content={canonica} />
+    <meta property="og:image" content={imagenOg} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Stefania del Valle Alberti, psicopedagoga" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#fdf6e3" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(negocio)} />
+    {esquemas.map((e) => <script type="application/ld+json" set:html={JSON.stringify(e)} />)}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

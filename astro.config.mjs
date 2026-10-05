@@ -4,6 +4,8 @@ import { defineConfig, envField } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://stefania-alberti.vercel.app',
@@ -20,5 +22,6 @@ export default defineConfig({
     }
   },
 
-  adapter: vercel()
+  adapter: vercel(),
+  integrations: [sitemap()]
 });
