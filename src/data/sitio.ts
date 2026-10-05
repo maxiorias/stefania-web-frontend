@@ -153,7 +153,25 @@ export const preguntas = [
     respuesta: 'Primero conocemos la historia de desarrollo; después hacemos la evaluación y el diagnóstico con herramientas neurocognitivas; y a partir de ahí se construye un plan de tratamiento personalizado, donde el juego cumple un rol fundamental.',
   },
   {
+    pregunta: '¿Trabajás con obras sociales?',
+    respuesta: 'Sí. Soy prestadora de OSDE, Sancor Salud y OSPE, y con SEROS trabajo por reintegro. También atiendo pacientes con CUD y de manera particular.',
+  },
+  {
     pregunta: '¿Dónde atendés?',
     respuesta: 'Atiendo de manera presencial en Trelew y los jueves en Puerto Madryn, Chubut. Podés consultar por WhatsApp al 3548-565370.',
   },
+];
+
+// Coberturas. Para mostrar el logo oficial: dejar el archivo en src/assets/obras-sociales/
+// e importarlo en `logo` (ej. import logoOsde from '../assets/obras-sociales/osde.svg')
+export const coberturas: { nombre: string; modalidad: string; logo?: ImageMetadata }[] = [
+  { nombre: 'OSDE', modalidad: 'Prestadora' },
+  { nombre: 'Sancor Salud', modalidad: 'Prestadora' },
+  { nombre: 'OSPE', modalidad: 'Prestadora' },
+  { nombre: 'SEROS', modalidad: 'Con reintegro' },
+];
+
+export const otrasCoberturas = [
+  { nombre: 'CUD', detalle: 'Pacientes con Certificado Único de Discapacidad' },
+  { nombre: 'Particular', detalle: 'Atención sin obra social' },
 ];

@@ -6,7 +6,7 @@ import Contacto from '../components/Contacto.astro';
 import Icono from '../components/Icono.astro';
 import fotoStefania from '../assets/foto-stefania.jpg';
 import iconoLogo from '../assets/logo-icono.png';
-import { persona, enlaceWhatsapp, evaluaciones, proceso, servicios, otrosServicios, trayectoria, preguntas } from '../data/sitio';
+import { persona, enlaceWhatsapp, evaluaciones, proceso, servicios, otrosServicios, trayectoria, preguntas, coberturas, otrasCoberturas } from '../data/sitio';
 
 const esquemaFaq = {
   '@context': 'https://schema.org',
@@ -158,6 +158,37 @@ const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
       </div>
     </section>
 
+    <!-- Obras sociales -->
+    <section id="obras-sociales" class="bg-white px-4 py-20 sm:px-6">
+      <div class={titulo} data-revelar>
+        <p class={antetitulo}>Coberturas</p>
+        <h2 class={h2}>Obras sociales</h2>
+        <p class="mt-4 text-lg text-texto">Trabajo con obras sociales, pacientes con CUD y de manera particular.</p>
+      </div>
+      <ul class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4">
+        {coberturas.map((c) => (
+          <li class="flex flex-col items-center justify-center gap-3 rounded-3xl bg-crema-claro px-4 py-8 text-center ring-1 ring-cafe/10" data-revelar>
+            {c.logo ? (
+              <Image src={c.logo} alt={c.nombre} height={48} class="h-12 w-auto object-contain" />
+            ) : (
+              <span class="font-serif text-2xl font-semibold tracking-tight text-tinta sm:text-3xl">{c.nombre}</span>
+            )}
+            <span class={`rounded-full px-3 py-1 text-xs font-semibold ${c.modalidad === 'Prestadora' ? 'bg-cafe text-white' : 'bg-white text-cafe ring-1 ring-cafe/25'}`}>
+              {c.modalidad}
+            </span>
+          </li>
+        ))}
+      </ul>
+      <ul class="mx-auto mt-4 grid max-w-5xl gap-4 sm:grid-cols-2">
+        {otrasCoberturas.map((c) => (
+          <li class="flex items-center gap-4 rounded-3xl bg-tinta px-6 py-5 text-white" data-revelar>
+            <span class="font-serif text-2xl">{c.nombre}</span>
+            <span class="text-sm text-white/75">{c.detalle}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
     <!-- Servicios -->
     <section id="servicios" class="bg-crema-claro px-4 py-24 sm:px-6">
       <div class={titulo} data-revelar>
@@ -254,6 +285,7 @@ const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
         <div class="flex flex-col gap-2">
           <a href="#evaluaciones" class={enlaceFooter}>Evaluaciones</a>
           <a href="#servicios" class={enlaceFooter}>Servicios</a>
+          <a href="#obras-sociales" class={enlaceFooter}>Obras sociales</a>
           <a href="#preguntas" class={enlaceFooter}>Preguntas frecuentes</a>
           <a href={`mailto:${persona.email}`} class={enlaceFooter}>Consultas por email</a>
           {persona.telefono && <a href={enlaceWhatsapp} target="_blank" rel="noopener" class={enlaceFooter}>WhatsApp {persona.telefono}</a>}
