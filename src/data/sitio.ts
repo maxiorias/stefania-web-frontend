@@ -8,6 +8,10 @@ import fotoEvaluacion from '../assets/foto-evaluacion-neuro.png';
 import fotoDiagnostico from '../assets/foto-diagnostico.png';
 import fotoTalleres from '../assets/foto-talleres.png';
 import fotoConsultoria from '../assets/foto-consultoria.png';
+import logoOsde from '../assets/obras-sociales/osde.png';
+import logoSancor from '../assets/obras-sociales/sancor.png';
+import logoOspe from '../assets/obras-sociales/ospe.png';
+import logoSeros from '../assets/obras-sociales/seros.png';
 
 export const persona = {
   nombre: 'Stefania del Valle Alberti',
@@ -153,7 +157,24 @@ export const preguntas = [
     respuesta: 'Primero conocemos la historia de desarrollo; después hacemos la evaluación y el diagnóstico con herramientas neurocognitivas; y a partir de ahí se construye un plan de tratamiento personalizado, donde el juego cumple un rol fundamental.',
   },
   {
+    pregunta: '¿Trabajás con obras sociales?',
+    respuesta: 'Sí. Soy prestadora de OSDE, Sancor Salud y OSPE, y con SEROS trabajo por reintegro. También atiendo pacientes con CUD y de manera particular.',
+  },
+  {
     pregunta: '¿Dónde atendés?',
     respuesta: 'Atiendo de manera presencial en Trelew y los jueves en Puerto Madryn, Chubut. Podés consultar por WhatsApp al 3548-565370.',
   },
+];
+
+// Coberturas. Sin `logo` se muestra el nombre en tipografía; los logos van en src/assets/obras-sociales/
+export const coberturas: { nombre: string; modalidad: string; logo?: ImageMetadata }[] = [
+  { nombre: 'OSDE', modalidad: 'Prestadora', logo: logoOsde },
+  { nombre: 'Sancor Salud', modalidad: 'Prestadora', logo: logoSancor },
+  { nombre: 'OSPE', modalidad: 'Prestadora', logo: logoOspe },
+  { nombre: 'SEROS', modalidad: 'Con reintegro', logo: logoSeros },
+];
+
+export const otrasCoberturas = [
+  { nombre: 'CUD', detalle: 'Pacientes con Certificado Único de Discapacidad' },
+  { nombre: 'Particular', detalle: 'Atención sin obra social' },
 ];
