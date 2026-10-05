@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import Icono from './Icono.astro';
+
+const links = [
+  { href: '#inicio', texto: 'Inicio' },
+  { href: '#sobre-mi', texto: 'Sobre mí' },
+  { href: '#servicios', texto: 'Servicios' },
+  { href: '#contacto', texto: 'Contacto' },
+];
+---
+
+<header class="sticky top-0 z-50 border-b border-arena/40 bg-crema/90 backdrop-blur">
+  <nav class="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-2 sm:px-6">
+    <a href="#inicio" aria-label="Inicio">
+      <Image src={logo} alt="Mgtr. Lic. Stefania del Valle Alberti" height={64} densities={[1, 2]} class="h-14 w-auto sm:h-16" loading="eager" />
+    </a>
+
+    <button
+      id="menu-boton"
+      type="button"
+      class="rounded-lg p-2 text-cafe md:hidden"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="menu-links"
+    >
+      <Icono nombre="menu" class="size-7" />
+    </button>
+
+    <ul
+      id="menu-links"
+      class="absolute inset-x-4 top-full hidden flex-col gap-1 rounded-2xl bg-crema p-3 text-center shadow-xl md:static md:flex md:flex-row md:gap-10 md:bg-transparent md:p-0 md:shadow-none"
+    >
+      {links.map((l) => (
+        <li>
+          <a href={l.href} class="block rounded-lg px-3 py-2 font-semibold text-cafe transition-colors hover:text-cafe-oscuro md:p-0">
+            {l.texto}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const boton = document.getElementById('menu-boton')!;
+  const menu = document.getElementById('menu-links')!;
+
+  const cerrar = () => {
+    menu.classList.add('hidden');
+    boton.setAttribute('aria-expanded', 'false');
+  };
+
+  boton.addEventListener('click', () => {
+    const abierto = menu.classList.toggle('hidden') === false;
+    boton.setAttribute('aria-expanded', String(abierto));
+  });
+  // En el celular, elegir una sección cierra el menú
+  menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', cerrar));
+</script>

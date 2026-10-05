@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Contacto from '../components/Contacto.astro';
+import Icono from '../components/Icono.astro';
+import fotoStefania from '../assets/foto-stefania.jpg';
+import { persona, trayectoria, servicios } from '../data/sitio';
+
+const anio = new Date().getFullYear();
+const enlaceFooter = 'text-crema/75 transition-colors hover:text-arena';
+---
+
+<Layout>
+  <Nav />
+
+  <main>
+    <!-- Inicio -->
+    <section id="inicio" class="mx-auto flex max-w-5xl flex-col-reverse items-center gap-10 px-4 py-16 sm:px-6 md:flex-row md:justify-between md:py-24">
+      <div class="max-w-xl text-center md:text-left">
+        <p class="text-sm font-semibold tracking-widest text-cafe uppercase">Psicopedagoga · Mat. {persona.matricula}</p>
+        <h1 class="mt-3 font-serif text-4xl leading-tight text-tinta sm:text-5xl">{persona.titulo}</h1>
+        {persona.bajada.map((linea) => <p class="mt-4 text-lg text-texto">{linea}</p>)}
+        <div class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
+          <a href="#contacto" class="rounded-xl bg-cafe px-6 py-3 font-semibold text-white transition hover:bg-cafe-oscuro">Contactar</a>
+          <a href="#servicios" class="rounded-xl border border-cafe px-6 py-3 font-semibold text-cafe transition hover:bg-cafe/10">Ver servicios</a>
+        </div>
+      </div>
+      <Image
+        src={fotoStefania}
+        alt={`Lic. ${persona.nombre}`}
+        width={320}
+        height={320}
+        densities={[1, 2]}
+        loading="eager"
+        class="size-56 shrink-0 rounded-full border-4 border-cafe object-cover shadow-xl sm:size-72"
+      />
+    </section>
+
+    <!-- Sobre mí -->
+    <section id="sobre-mi" class="bg-crema-claro px-4 py-20 sm:px-6">
+      <h2 class="text-center font-serif text-4xl text-tinta">Sobre mí</h2>
+      <div class="mx-auto mt-14 flex max-w-5xl flex-col gap-14">
+        {trayectoria.map((t, i) => (
+          <article class={`flex flex-col items-center gap-8 text-center md:text-left ${i % 2 ? 'md:flex-row-reverse' : 'md:flex-row'}`}>
+            <Image
+              src={t.foto}
+              alt={t.alt}
+              width={800}
+              class="aspect-[20/11] w-full max-w-md rounded-2xl border-4 border-cafe/20 object-cover shadow-md"
+            />
+            <div class="flex-1 text-texto">
+              <h3 class="font-serif text-2xl text-cafe">{t.titulo}</h3>
+              {t.anio && <p class="mt-2"><strong>Año de egreso:</strong> {t.anio}</p>}
+              <p class="mt-2 leading-relaxed">{t.texto}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="px-4 py-20 sm:px-6">
+      <h2 class="text-center font-serif text-4xl text-tinta">Servicios</h2>
+      <div class="mx-auto mt-14 grid max-w-5xl gap-8 sm:grid-cols-2">
+        {servicios.map((s) => (
+          <article class="overflow-hidden rounded-3xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+            <Image src={s.foto} alt={s.titulo} width={800} class="aspect-[4/3] w-full object-cover" />
+            <div class="p-6">
+              <h3 class="font-serif text-2xl text-cafe">{s.titulo}</h3>
+              <p class="mt-2 leading-relaxed text-texto">{s.texto}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <Contacto />
+  </main>
+
+  <footer class="bg-cafe-oscuro px-4 py-12 text-crema sm:px-6">
+    <div class="mx-auto grid max-w-6xl gap-10 text-center md:grid-cols-3 md:text-left">
+      <div class="space-y-2 text-crema/75">
+        <p class="font-serif text-lg text-crema">{persona.nombre}</p>
+        <p>Psicopedagoga · Matrícula {persona.matricula}</p>
+        <p>{persona.ubicacion}</p>
+      </div>
+
+      <div>
+        <h4 class="mb-3 border-b border-crema/20 pb-1 font-semibold">Enlaces útiles</h4>
+        <div class="flex flex-col gap-2">
+          <a href="#servicios" class={enlaceFooter}>Ver servicios</a>
+          <a href={persona.linkedin} target="_blank" rel="noopener" class={enlaceFooter}>Perfil profesional (LinkedIn)</a>
+          <a href={`mailto:${persona.email}`} class={enlaceFooter}>Consultas por email</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="mb-3 border-b border-crema/20 pb-1 font-semibold">Seguime</h4>
+        <div class="flex justify-center gap-4 md:justify-start">
+          <a href={persona.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class={enlaceFooter}>
+            <Icono nombre="linkedin" class="size-7" />
+          </a>
+          {persona.whatsapp && (
+            <a href={`https://wa.me/${persona.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp" class={enlaceFooter}>
+              <Icono nombre="whatsapp" class="size-7" />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+    <p class="mt-10 text-center text-sm text-crema/60">&copy; {anio} {persona.nombre}. Todos los derechos reservados.</p>
+  </footer>
+</Layout>

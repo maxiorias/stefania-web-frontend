@@ -1,0 +1,138 @@
+---
+import { getImage } from 'astro:assets';
+import fondoImg from '../assets/fondo-contacto.png';
+import Icono from './Icono.astro';
+import { persona } from '../data/sitio';
+
+const fondo = await getImage({ src: fondoImg, width: 1920, format: 'webp' });
+
+const botones = [
+  { href: `mailto:${persona.email}`, icono: 'email', texto: 'Email' },
+  { href: persona.linkedin, icono: 'linkedin', texto: 'LinkedIn', externo: true },
+  { href: persona.tesis, icono: 'pdf', texto: 'Ver tesis de maestría', externo: true },
+  { href: persona.cv, icono: 'descarga', texto: 'Descargar CV', descarga: true },
+] as const;
+
+const campo =
+  'mt-1.5 w-full rounded-xl border border-arena bg-[#faf8f5] px-4 py-3 text-tinta outline-none transition focus:border-cafe focus:ring-4 focus:ring-cafe/15';
+---
+
+<section
+  id="contacto"
+  class="relative bg-cover bg-center px-4 py-24 text-center text-white md:bg-fixed"
+  style={`background-image: url(${fondo.src})`}
+>
+  <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-3xl">
+    <h2 class="font-serif text-4xl">Contacto</h2>
+    <p class="mx-auto mt-4 max-w-xl text-lg text-white/90">
+      Podés comunicarte con <strong>{persona.nombre}</strong> para consultas profesionales, colaboraciones o presentaciones académicas.
+    </p>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      {botones.map((b) => (
+        <a
+          href={b.href}
+          target={'externo' in b ? '_blank' : undefined}
+          rel={'externo' in b ? 'noopener' : undefined}
+          download={'descarga' in b ? 'CV - Stefania del Valle Alberti.pdf' : undefined}
+          class="flex items-center gap-3 rounded-2xl bg-white px-5 py-3.5 font-semibold text-tinta shadow-lg transition hover:-translate-y-1 hover:text-cafe"
+        >
+          <Icono nombre={b.icono} class="size-5 text-cafe" />
+          {b.texto}
+        </a>
+      ))}
+    </div>
+
+    <form id="form-contacto" class="mx-auto mt-16 max-w-xl rounded-3xl bg-white/[.97] p-8 text-left text-tinta shadow-2xl sm:p-10" novalidate>
+      <h3 class="text-center font-serif text-2xl text-cafe-oscuro">Enviar mensaje</h3>
+
+      <label for="nombre" class="mt-6 block font-semibold">Nombre</label>
+      <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required minlength="2" maxlength="80" class={campo} />
+
+      <label for="email" class="mt-4 block font-semibold">Correo electrónico</label>
+      <input id="email" name="email" type="email" placeholder="Tu correo" autocomplete="email" required maxlength="120" class={campo} />
+
+      <label for="mensaje" class="mt-4 block font-semibold">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribí tu mensaje..." required minlength="10" maxlength="500" class={campo}></textarea>
+      <div id="contador" class="mt-1 text-right text-sm text-texto">0 / 500</div>
+
+      <!-- Honeypot: invisible para personas, los bots lo completan -->
+      <div class="absolute -left-[9999px]" aria-hidden="true">
+        <label for="website">No completar</label>
+        <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <p id="form-msg" class="mt-3 min-h-6 text-sm font-medium" role="status" aria-live="polite"></p>
+
+      <button type="submit" class="mt-2 w-full rounded-xl bg-cafe py-3.5 font-semibold text-white transition hover:bg-cafe-oscuro disabled:cursor-wait disabled:opacity-70">
+        Enviar
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+  const MAX = 500;
+  const form = document.getElementById('form-contacto') as HTMLFormElement;
+  const mensaje = form.querySelector<HTMLTextAreaElement>('#mensaje')!;
+  const contador = document.getElementById('contador')!;
+  const aviso = document.getElementById('form-msg')!;
+  const boton = form.querySelector('button')!;
+
+  const actualizarContador = () => (contador.textContent = `${mensaje.value.length} / ${MAX}`);
+  mensaje.addEventListener('input', actualizarContador);
+
+  const mostrar = (texto: string, ok: boolean) => {
+    aviso.textContent = texto;
+    aviso.className = `mt-3 min-h-6 text-sm font-medium ${ok ? 'text-green-700' : 'text-red-700'}`;
+  };
+
+  function validar(nombre: string, email: string, texto: string) {
+    if (nombre.length < 2) return 'Ingresá un nombre válido.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Ingresá un correo válido.';
+    if (texto.length < 10) return 'El mensaje debe tener al menos 10 caracteres.';
+    return null;
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (boton.disabled) return;
+
+    const datos = Object.fromEntries(new FormData(form)) as Record<string, string>;
+    const nombre = datos.nombre.trim();
+    const email = datos.email.trim();
+    const texto = datos.mensaje.trim();
+
+    const error = validar(nombre, email, texto);
+    if (error) return mostrar(error, false);
+
+    boton.disabled = true;
+    boton.textContent = 'Enviando...';
+    aviso.textContent = '';
+
+    try {
+      const res = await fetch('/api/enviar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, mensaje: texto, website: datos.website }),
+        signal: AbortSignal.timeout(20000),
+      });
+      const cuerpo = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        mostrar('Mensaje enviado. ¡Gracias por escribir!', true);
+        form.reset();
+        actualizarContador();
+      } else {
+        mostrar(cuerpo.message ?? 'No se pudo enviar el mensaje. Intentá nuevamente.', false);
+      }
+    } catch {
+      mostrar('No se pudo conectar con el servidor. Intentá nuevamente.', false);
+    } finally {
+      boton.disabled = false;
+      boton.textContent = 'Enviar';
+    }
+  });
+</script>
