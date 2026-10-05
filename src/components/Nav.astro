@@ -1,42 +1,61 @@
 ---
 import { Image } from 'astro:assets';
-import logo from '../assets/logo.png';
+import icono from '../assets/logo-icono.png';
 import Icono from './Icono.astro';
 
 const links = [
-  { href: '#inicio', texto: 'Inicio' },
   { href: '#sobre-mi', texto: 'Sobre mí' },
   { href: '#servicios', texto: 'Servicios' },
   { href: '#contacto', texto: 'Contacto' },
 ];
 ---
 
-<header class="sticky top-0 z-50 border-b border-arena/40 bg-crema/90 backdrop-blur">
-  <nav class="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-2 sm:px-6">
-    <a href="#inicio" aria-label="Inicio">
-      <Image src={logo} alt="Mgtr. Lic. Stefania del Valle Alberti" height={64} densities={[1, 2]} class="h-14 w-auto sm:h-16" loading="eager" />
+<header class="fixed inset-x-0 top-3 z-50 px-3 sm:top-5">
+  <nav
+    id="nav"
+    class="relative mx-auto flex max-w-5xl items-center justify-between rounded-full border border-white/60 bg-white/70 py-2 pr-2 pl-3 shadow-lg shadow-cafe/5 backdrop-blur-md sm:pl-4"
+  >
+    <a href="#inicio" class="flex items-center gap-2.5" aria-label="Inicio">
+      <Image src={icono} alt="" width={40} height={40} densities={[1, 2]} class="size-9 sm:size-10" loading="eager" />
+      <span class="leading-tight">
+        <span class="block font-serif text-[15px] font-semibold text-tinta sm:text-base">Stefania Alberti</span>
+        <span class="block text-[11px] tracking-wide text-cafe uppercase">Psicopedagoga</span>
+      </span>
     </a>
+
+    <ul class="hidden items-center gap-1 md:flex">
+      {links.map((l) => (
+        <li>
+          <a href={l.href} data-nav-link class="rounded-full px-4 py-2 text-sm font-medium text-texto transition-colors hover:text-cafe">
+            {l.texto}
+          </a>
+        </li>
+      ))}
+      <li class="ml-2">
+        <a href="#contacto" class="rounded-full bg-cafe px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cafe-oscuro">
+          Escribime
+        </a>
+      </li>
+    </ul>
 
     <button
       id="menu-boton"
       type="button"
-      class="rounded-lg p-2 text-cafe md:hidden"
+      class="grid size-11 place-items-center rounded-full bg-cafe text-white md:hidden"
       aria-label="Abrir menú"
       aria-expanded="false"
-      aria-controls="menu-links"
+      aria-controls="menu-movil"
     >
-      <Icono nombre="menu" class="size-7" />
+      <Icono nombre="menu" class="size-5" />
     </button>
 
     <ul
-      id="menu-links"
-      class="absolute inset-x-4 top-full hidden flex-col gap-1 rounded-2xl bg-crema p-3 text-center shadow-xl md:static md:flex md:flex-row md:gap-10 md:bg-transparent md:p-0 md:shadow-none"
+      id="menu-movil"
+      class="absolute inset-x-0 top-full mt-2 hidden flex-col gap-1 rounded-3xl border border-white/60 bg-white/95 p-3 shadow-xl backdrop-blur-md md:hidden"
     >
       {links.map((l) => (
         <li>
-          <a href={l.href} class="block rounded-lg px-3 py-2 font-semibold text-cafe transition-colors hover:text-cafe-oscuro md:p-0">
-            {l.texto}
-          </a>
+          <a href={l.href} class="block rounded-2xl px-4 py-3 font-medium text-tinta hover:bg-crema">{l.texto}</a>
         </li>
       ))}
     </ul>
@@ -45,17 +64,31 @@ const links = [
 
 <script>
   const boton = document.getElementById('menu-boton')!;
-  const menu = document.getElementById('menu-links')!;
+  const menu = document.getElementById('menu-movil')!;
 
   const cerrar = () => {
     menu.classList.add('hidden');
     boton.setAttribute('aria-expanded', 'false');
   };
-
   boton.addEventListener('click', () => {
-    const abierto = menu.classList.toggle('hidden') === false;
+    const abierto = !menu.classList.toggle('hidden');
     boton.setAttribute('aria-expanded', String(abierto));
   });
-  // En el celular, elegir una sección cierra el menú
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', cerrar));
+
+  // Resalta en el menú la sección que se está viendo
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+  const observador = new IntersectionObserver(
+    (entradas) =>
+      entradas.forEach((e) => {
+        if (!e.isIntersecting) return;
+        links.forEach((l) => {
+          const activo = l.getAttribute('href') === `#${e.target.id}`;
+          l.classList.toggle('bg-crema', activo);
+          l.classList.toggle('text-cafe', activo);
+        });
+      }),
+    { rootMargin: '-45% 0px -50% 0px' }
+  );
+  document.querySelectorAll('main section[id]').forEach((s) => observador.observe(s));
 </script>

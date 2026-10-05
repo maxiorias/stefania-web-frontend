@@ -31,6 +31,7 @@ export const trayectoria = [
     anio: '2018',
     texto: 'Formación en Psicopedagogía con enfoque en procesos de aprendizaje, desarrollo personal y acompañamiento educativo.',
     foto: fotoLicenciatura,
+    posicion: 'center 30%',
     alt: 'Licenciatura en Psicopedagogía',
   },
   {
@@ -38,18 +39,23 @@ export const trayectoria = [
     anio: '2023',
     texto: 'Especialización en Derechos Humanos y Políticas Públicas de Niñez, Adolescencia y Familia.',
     foto: fotoMaestria,
+    posicion: 'center 35%',
     alt: 'Maestría en Derechos Humanos',
   },
   {
     titulo: 'Feria Nacional del Libro',
+    etiqueta: 'Tesis publicada',
     texto: 'Presentación de la tesis de maestría y difusión de su trabajo en el ámbito académico y social.',
     foto: fotoLibro,
+    posicion: 'center 80%',
     alt: 'Feria Nacional del Libro',
   },
   {
     titulo: 'XV Congreso Nacional de Psicopedagogía',
+    etiqueta: 'Exposición',
     texto: 'Exposición de la tesis de maestría ante colegas y profesionales del campo de la Psicopedagogía.',
     foto: fotoCongreso,
+    posicion: 'center 30%',
     alt: 'Congreso Nacional de Psicopedagogía',
   },
 ];
