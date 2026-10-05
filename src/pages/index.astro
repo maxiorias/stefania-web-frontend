@@ -5,17 +5,22 @@ import Nav from '../components/Nav.astro';
 import Contacto from '../components/Contacto.astro';
 import Icono from '../components/Icono.astro';
 import fotoStefania from '../assets/foto-stefania.jpg';
-import { persona, trayectoria, servicios } from '../data/sitio';
+import iconoLogo from '../assets/logo-icono.png';
+import { persona, enlaceWhatsapp, evaluaciones, proceso, servicios, otrosServicios, trayectoria } from '../data/sitio';
 
 const anio = new Date().getFullYear();
 const enlaceFooter = 'text-crema/70 transition-colors hover:text-white';
 
 const credenciales = [
-  { valor: '2018', texto: 'Licenciatura en Psicopedagogía' },
-  { valor: '2023', texto: 'Maestría en Derechos Humanos' },
-  { valor: 'MP 345', texto: 'Matrícula en Chubut' },
-  { valor: 'Chubut', texto: 'Trelew y Puerto Madryn' },
+  { valor: '+8 años', texto: 'En neurorehabilitación' },
+  { valor: 'Wechsler', texto: 'Evaluación del funcionamiento intelectual' },
+  { valor: 'Trelew', texto: 'Atención presencial' },
+  { valor: 'Puerto Madryn', texto: 'Los jueves' },
 ];
+
+const titulo = 'mx-auto max-w-2xl text-center';
+const antetitulo = 'text-xs font-semibold tracking-widest text-cafe uppercase';
+const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
 ---
 
 <Layout>
@@ -30,18 +35,22 @@ const credenciales = [
         <div class="text-center md:text-left">
           <p class="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-xs font-semibold tracking-widest text-cafe uppercase ring-1 ring-cafe/15">
             <span class="size-1.5 rounded-full bg-cafe"></span>
-            Psicopedagoga · Abordaje neurocognitivo
+            {persona.titulo}
           </p>
-          <h1 class="mt-6 font-serif text-[2.6rem] leading-[1.05] sm:text-6xl tracking-tight text-tinta lg:text-7xl">
-            Stefania del Valle <em class="text-cafe">Alberti</em>
+          <h1 class="mt-6 font-serif text-[2.4rem] leading-[1.08] tracking-tight text-tinta sm:text-6xl">
+            Evaluación psicopedagógica con abordaje <em class="text-cafe">neurocognitivo</em>
           </h1>
-          {persona.bajada.map((linea) => <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-texto md:mx-0">{linea}</p>)}
+          <p class="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-texto md:mx-0">{persona.presentacion}</p>
           <div class="mt-9 flex flex-wrap justify-center gap-3 md:justify-start">
-            <a href="#contacto" class="rounded-full bg-cafe px-7 py-3.5 font-semibold text-white shadow-lg shadow-cafe/25 transition hover:-translate-y-0.5 hover:bg-cafe-oscuro">
-              Hacer una consulta
-            </a>
-            <a href="#servicios" class="rounded-full bg-white/70 px-7 py-3.5 font-semibold text-cafe ring-1 ring-cafe/25 transition hover:bg-white">
-              Ver servicios
+            {enlaceWhatsapp ? (
+              <a href={enlaceWhatsapp} target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-cafe px-7 py-3.5 font-semibold text-white shadow-lg shadow-cafe/25 transition hover:-translate-y-0.5 hover:bg-cafe-oscuro">
+                <Icono nombre="whatsapp" class="size-5" /> Consultar por WhatsApp
+              </a>
+            ) : (
+              <a href="#contacto" class="rounded-full bg-cafe px-7 py-3.5 font-semibold text-white shadow-lg shadow-cafe/25 transition hover:bg-cafe-oscuro">Hacer una consulta</a>
+            )}
+            <a href="#evaluaciones" class="rounded-full bg-white/70 px-7 py-3.5 font-semibold text-cafe ring-1 ring-cafe/25 transition hover:bg-white">
+              Ver evaluaciones
             </a>
           </div>
         </div>
@@ -62,10 +71,12 @@ const credenciales = [
             <div class="absolute inset-0 bg-crema mix-blend-multiply" aria-hidden="true"></div>
           </div>
           <div class="absolute -bottom-5 -left-6 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-left-10">
-            <span class="grid size-10 place-items-center rounded-full bg-crema font-serif text-lg text-cafe">DH</span>
+            <span class="grid size-10 place-items-center rounded-full bg-crema" aria-hidden="true">
+              <Image src={iconoLogo} alt="" width={28} height={28} densities={[1, 2]} class="size-7" />
+            </span>
             <span class="text-left text-sm leading-tight">
-              <strong class="block text-tinta">Magíster en DD.HH.</strong>
-              <span class="text-texto">Niñez, adolescencia y familia</span>
+              <strong class="block text-tinta">Lic. en Psicopedagogía</strong>
+              <span class="text-texto">{persona.matriculas[0].numero} · {persona.matriculas[0].provincia}</span>
             </span>
           </div>
         </div>
@@ -73,36 +84,120 @@ const credenciales = [
 
       <dl class="relative mx-auto mt-24 grid max-w-6xl grid-cols-2 gap-px overflow-hidden rounded-3xl bg-cafe/10 ring-1 ring-cafe/10 md:grid-cols-4">
         {credenciales.map((c) => (
-          <div class="bg-white/60 px-5 py-6 text-center backdrop-blur">
-            <dt class="font-serif text-2xl text-cafe sm:text-3xl">{c.valor}</dt>
+          <div class="bg-white/60 px-4 py-6 text-center backdrop-blur">
+            <dt class="font-serif text-xl text-cafe sm:text-3xl">{c.valor}</dt>
             <dd class="mt-1 text-sm text-texto">{c.texto}</dd>
           </div>
         ))}
       </dl>
     </section>
 
+    <!-- Evaluaciones -->
+    <section id="evaluaciones" class="bg-white px-4 py-24 sm:px-6">
+      <div class="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+        <div class="lg:sticky lg:top-32" data-revelar>
+          <p class={antetitulo}>Evaluaciones</p>
+          <h2 class={h2}>Conocer el perfil para acompañar mejor</h2>
+          <p class="mt-5 text-lg leading-relaxed text-texto">{evaluaciones.intro}</p>
+          <Image src={evaluaciones.foto} alt="Evaluación neurocognitiva" width={640} class="mt-8 aspect-[4/3] w-full rounded-3xl object-cover shadow-lg" />
+        </div>
+
+        <div class="space-y-5">
+          {evaluaciones.items.map((e, i) => (
+            <article class="rounded-3xl bg-crema-claro p-7 ring-1 ring-cafe/10 sm:p-8" data-revelar>
+              <span class="font-serif text-sm text-cafe/70">0{i + 1}</span>
+              <h3 class="mt-1 font-serif text-2xl text-tinta">{e.titulo}</h3>
+              <p class="mt-3 leading-relaxed text-texto">{e.texto}</p>
+            </article>
+          ))}
+          <blockquote class="rounded-3xl bg-cafe p-7 font-serif text-xl leading-snug text-white sm:p-8 sm:text-2xl" data-revelar>
+            “{evaluaciones.cita}”
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proceso -->
+    <section id="proceso" class="px-4 py-24 sm:px-6">
+      <div class={titulo} data-revelar>
+        <p class={antetitulo}>Cómo trabajo</p>
+        <h2 class={h2}>El proceso, paso a paso</h2>
+      </div>
+      <ol class="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-3">
+        {proceso.map((p, i) => (
+          <li class="relative rounded-3xl bg-white p-8 shadow-sm ring-1 ring-cafe/10" data-revelar>
+            <span class="grid size-12 place-items-center rounded-full bg-cafe font-serif text-xl text-white">{i + 1}</span>
+            <h3 class="mt-5 font-serif text-2xl text-tinta">{p.titulo}</h3>
+            <p class="mt-3 leading-relaxed text-texto">{p.texto}</p>
+          </li>
+        ))}
+      </ol>
+
+      <!-- Cuándo consultar -->
+      <div class="mx-auto mt-16 flex max-w-6xl flex-col items-center gap-6 rounded-[2rem] bg-tinta px-8 py-10 text-center text-white md:flex-row md:justify-between md:px-12 md:text-left" data-revelar>
+        <div class="max-w-2xl">
+          <h3 class="font-serif text-2xl sm:text-3xl">¿Cuándo consultar?</h3>
+          <p class="mt-3 leading-relaxed text-white/80">
+            Si sos mamá, papá o docente y venís notando dificultades en el aprendizaje, la atención o la organización, este puede ser el momento.{' '}
+            <strong class="text-white">Consultar a tiempo es una forma de cuidado.</strong>
+          </p>
+        </div>
+        <a href={enlaceWhatsapp || '#contacto'} target={enlaceWhatsapp ? '_blank' : undefined} rel="noopener" class="shrink-0 rounded-full bg-white px-7 py-3.5 font-semibold text-tinta transition hover:bg-crema">
+          Escribime
+        </a>
+      </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="bg-crema-claro px-4 py-24 sm:px-6">
+      <div class={titulo} data-revelar>
+        <p class={antetitulo}>Qué hago</p>
+        <h2 class={h2}>Servicios</h2>
+      </div>
+      <div class="mx-auto mt-14 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {servicios.map((s) => (
+          <article class="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-cafe/10 transition duration-300 hover:-translate-y-1 hover:shadow-xl" data-revelar>
+            <div class="overflow-hidden">
+              <Image src={s.foto} alt={s.titulo} width={600} class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="font-serif text-xl leading-snug text-tinta">{s.titulo}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-texto">{s.texto}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <ul class="mx-auto mt-8 flex max-w-6xl flex-wrap justify-center gap-3" data-revelar>
+        {otrosServicios.map((s) => (
+          <li class="rounded-full bg-white px-5 py-2.5 text-sm font-medium text-cafe ring-1 ring-cafe/15">{s}</li>
+        ))}
+      </ul>
+    </section>
+
     <!-- Sobre mí: línea de tiempo -->
-    <section id="sobre-mi" class="bg-crema-claro px-4 py-24 sm:px-6">
-      <div class="mx-auto max-w-2xl text-center" data-revelar>
-        <p class="text-xs font-semibold tracking-widest text-cafe uppercase">Trayectoria</p>
-        <h2 class="mt-3 font-serif text-4xl text-tinta sm:text-5xl">Sobre mí</h2>
+    <section id="sobre-mi" class="px-4 py-24 sm:px-6">
+      <div class={titulo} data-revelar>
+        <p class={antetitulo}>Trayectoria</p>
+        <h2 class={h2}>Sobre mí</h2>
       </div>
 
       <ol class="relative mx-auto mt-16 max-w-5xl space-y-14 before:absolute before:top-2 before:bottom-2 before:left-4 before:w-px before:bg-cafe/20 md:space-y-20 md:before:left-1/2">
         {trayectoria.map((t, i) => (
           <li class="relative grid items-center gap-6 pl-12 md:grid-cols-2 md:gap-16 md:pl-0" data-revelar>
-            <span class="absolute top-2 left-4 size-3 -translate-x-1/2 rounded-full bg-cafe ring-4 ring-crema-claro md:top-1/2 md:left-1/2 md:-translate-y-1/2" aria-hidden="true"></span>
+            <span class="absolute top-2 left-4 size-3 -translate-x-1/2 rounded-full bg-cafe ring-4 ring-crema md:top-1/2 md:left-1/2 md:-translate-y-1/2" aria-hidden="true"></span>
             <div class={i % 2 ? 'md:order-2' : ''}>
-              <Image
-                src={t.foto}
-                alt={t.alt}
-                width={720}
-                class="aspect-[4/3] w-full rounded-3xl object-cover shadow-lg"
-                style={`object-position: ${t.posicion ?? 'center'}`}
-              />
+              {t.foto ? (
+                <Image
+                  src={t.foto}
+                  alt={t.alt ?? t.titulo}
+                  width={720}
+                  class="aspect-[4/3] w-full rounded-3xl object-cover shadow-lg"
+                  style={`object-position: ${t.posicion ?? 'center'}`}
+                />
+              ) : null}
             </div>
-            <div class={i % 2 ? 'md:order-1 md:text-right' : ''}>
-              <span class="inline-block rounded-full bg-crema px-3 py-1 text-xs font-semibold tracking-wide text-cafe ring-1 ring-cafe/15">
+            <div class={`${i % 2 ? 'md:order-1 md:text-right' : ''} ${t.foto ? '' : 'rounded-3xl bg-white p-7 shadow-sm ring-1 ring-cafe/10'}`}>
+              <span class="inline-block rounded-full bg-crema-claro px-3 py-1 text-xs font-semibold tracking-wide text-cafe ring-1 ring-cafe/15">
                 {t.anio ?? t.etiqueta}
               </span>
               <h3 class="mt-3 font-serif text-2xl leading-snug text-tinta sm:text-3xl">{t.titulo}</h3>
@@ -113,28 +208,6 @@ const credenciales = [
       </ol>
     </section>
 
-    <!-- Servicios -->
-    <section id="servicios" class="px-4 py-24 sm:px-6">
-      <div class="mx-auto max-w-2xl text-center" data-revelar>
-        <p class="text-xs font-semibold tracking-widest text-cafe uppercase">Qué hago</p>
-        <h2 class="mt-3 font-serif text-4xl text-tinta sm:text-5xl">Servicios</h2>
-      </div>
-      <div class="mx-auto mt-14 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {servicios.map((s, i) => (
-          <article class="group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-cafe/10 transition duration-300 hover:-translate-y-1 hover:shadow-xl" data-revelar>
-            <div class="overflow-hidden">
-              <Image src={s.foto} alt={s.titulo} width={600} class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-105" />
-            </div>
-            <div class="flex flex-1 flex-col p-6">
-              <span class="font-serif text-sm text-cafe/70">0{i + 1}</span>
-              <h3 class="mt-1 font-serif text-xl leading-snug text-tinta">{s.titulo}</h3>
-              <p class="mt-3 text-[15px] leading-relaxed text-texto">{s.texto}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
     <Contacto />
   </main>
 
@@ -142,7 +215,7 @@ const credenciales = [
     <div class="mx-auto grid max-w-6xl gap-10 text-center md:grid-cols-3 md:text-left">
       <div class="space-y-1.5 text-crema/70">
         <p class="font-serif text-xl text-white">{persona.nombre}</p>
-        <p>Psicopedagoga</p>
+        <p>Licenciada en Psicopedagogía</p>
         {persona.matriculas.map((m) => <p>Matrícula {m.provincia}: {m.numero}</p>)}
         <p>{persona.ubicacion}</p>
       </div>
@@ -150,9 +223,10 @@ const credenciales = [
       <div>
         <h4 class="mb-3 text-xs font-semibold tracking-widest text-arena uppercase">Enlaces</h4>
         <div class="flex flex-col gap-2">
+          <a href="#evaluaciones" class={enlaceFooter}>Evaluaciones</a>
           <a href="#servicios" class={enlaceFooter}>Servicios</a>
-          <a href={persona.linkedin} target="_blank" rel="noopener" class={enlaceFooter}>Perfil profesional (LinkedIn)</a>
           <a href={`mailto:${persona.email}`} class={enlaceFooter}>Consultas por email</a>
+          {persona.telefono && <a href={enlaceWhatsapp} target="_blank" rel="noopener" class={enlaceFooter}>WhatsApp {persona.telefono}</a>}
         </div>
       </div>
 
@@ -165,8 +239,8 @@ const credenciales = [
           <a href={persona.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="grid size-11 place-items-center rounded-full bg-white/10 text-crema transition hover:bg-cafe">
             <Icono nombre="linkedin" class="size-5" />
           </a>
-          {persona.whatsapp && (
-            <a href={`https://wa.me/${persona.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp" class="grid size-11 place-items-center rounded-full bg-white/10 text-crema transition hover:bg-cafe">
+          {enlaceWhatsapp && (
+            <a href={enlaceWhatsapp} target="_blank" rel="noopener" aria-label="WhatsApp" class="grid size-11 place-items-center rounded-full bg-white/10 text-crema transition hover:bg-cafe">
               <Icono nombre="whatsapp" class="size-5" />
             </a>
           )}
@@ -177,4 +251,16 @@ const credenciales = [
       &copy; {anio} {persona.nombre}. Todos los derechos reservados.
     </p>
   </footer>
+
+  {enlaceWhatsapp && (
+    <a
+      href={enlaceWhatsapp}
+      target="_blank"
+      rel="noopener"
+      aria-label="Escribir por WhatsApp"
+      class="fixed right-4 bottom-4 z-40 grid size-14 place-items-center rounded-full bg-[#25D366] text-white shadow-xl shadow-black/20 transition hover:scale-105 sm:right-6 sm:bottom-6"
+    >
+      <Icono nombre="whatsapp" class="size-7" />
+    </a>
+  )}
 </Layout>

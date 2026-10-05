@@ -2,7 +2,7 @@
 import { getImage } from 'astro:assets';
 import fondoImg from '../assets/fondo-contacto.png';
 import Icono from './Icono.astro';
-import { persona } from '../data/sitio';
+import { persona, enlaceWhatsapp } from '../data/sitio';
 
 const fondo = await getImage({ src: fondoImg, width: 1920, format: 'webp' });
 
@@ -33,7 +33,22 @@ const campo =
         Podés comunicarte con <strong class="text-white">{persona.nombre}</strong> para consultas profesionales, colaboraciones o presentaciones académicas.
       </p>
 
-      <div class="mx-auto mt-10 grid max-w-lg gap-3 sm:grid-cols-2 [&>a:last-child:nth-child(odd)]:sm:col-span-2 lg:mx-0">
+      {enlaceWhatsapp && (
+        <a href={enlaceWhatsapp} target="_blank" rel="noopener" class="mx-auto mt-8 flex max-w-lg items-center justify-center gap-3 rounded-2xl bg-[#25D366] px-6 py-4 text-lg font-semibold text-white shadow-lg transition hover:brightness-105 lg:mx-0">
+          <Icono nombre="whatsapp" class="size-6" /> WhatsApp {persona.telefono}
+        </a>
+      )}
+
+      <div class="mx-auto mt-6 grid max-w-lg grid-cols-2 gap-3 lg:mx-0">
+        {persona.sedes.map((s) => (
+          <div class="rounded-2xl bg-white/10 px-4 py-3 text-left ring-1 ring-white/20">
+            <p class="font-serif text-lg text-white">{s.ciudad}</p>
+            <p class="text-sm text-white/75">{s.detalle}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mx-auto mt-6 grid max-w-lg gap-3 sm:grid-cols-2 [&>a:last-child:nth-child(odd)]:sm:col-span-2 lg:mx-0">
         {botones.map((b) => (
           <a
             href={b.href}
@@ -53,7 +68,7 @@ const campo =
 
     <form id="form-contacto" class="relative rounded-[2rem] bg-white p-7 text-left text-tinta shadow-2xl sm:p-10" novalidate data-revelar>
       <h3 class="font-serif text-2xl text-tinta">Enviar mensaje</h3>
-      <p class="mt-1 text-sm text-texto">Te respondo a la brevedad.</p>
+      <p class="mt-1 text-sm text-texto">¿Preferís escribir por acá? Te respondo por mail.</p>
 
       <label for="nombre" class="mt-6 block text-sm font-semibold">Nombre</label>
       <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required minlength="2" maxlength="80" class={campo} />
