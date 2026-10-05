@@ -8,55 +8,62 @@ const fondo = await getImage({ src: fondoImg, width: 1920, format: 'webp' });
 
 const botones = [
   { href: `mailto:${persona.email}`, icono: 'email', texto: 'Email' },
+  { href: persona.instagram, icono: 'instagram', texto: 'Instagram', externo: true },
   { href: persona.linkedin, icono: 'linkedin', texto: 'LinkedIn', externo: true },
   { href: persona.tesis, icono: 'pdf', texto: 'Ver tesis de maestría', externo: true },
   { href: persona.cv, icono: 'descarga', texto: 'Descargar CV', descarga: true },
 ] as const;
 
 const campo =
-  'mt-1.5 w-full rounded-xl border border-arena bg-[#faf8f5] px-4 py-3 text-tinta outline-none transition focus:border-cafe focus:ring-4 focus:ring-cafe/15';
+  'mt-1.5 w-full rounded-2xl border border-arena/70 bg-crema-claro px-4 py-3 text-tinta outline-none transition focus:border-cafe focus:ring-4 focus:ring-cafe/15';
 ---
 
 <section
   id="contacto"
-  class="relative bg-cover bg-center px-4 py-24 text-center text-white md:bg-fixed"
+  class="relative bg-cover bg-center px-4 py-24 text-white sm:px-6 md:bg-fixed md:py-32"
   style={`background-image: url(${fondo.src})`}
 >
-  <div class="absolute inset-0 bg-black/45" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-linear-to-br from-tinta/90 via-cafe-oscuro/75 to-tinta/70" aria-hidden="true"></div>
 
-  <div class="relative mx-auto max-w-3xl">
-    <h2 class="font-serif text-4xl">Contacto</h2>
-    <p class="mx-auto mt-4 max-w-xl text-lg text-white/90">
-      Podés comunicarte con <strong>{persona.nombre}</strong> para consultas profesionales, colaboraciones o presentaciones académicas.
-    </p>
+  <div class="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <div class="text-center lg:text-left" data-revelar>
+      <p class="text-xs font-semibold tracking-widest text-arena uppercase">Contacto</p>
+      <h2 class="mt-3 font-serif text-4xl leading-tight sm:text-5xl">Hablemos</h2>
+      <p class="mx-auto mt-5 max-w-lg text-lg leading-relaxed text-white/85 lg:mx-0">
+        Podés comunicarte con <strong class="text-white">{persona.nombre}</strong> para consultas profesionales, colaboraciones o presentaciones académicas.
+      </p>
 
-    <div class="mt-10 flex flex-wrap justify-center gap-4">
-      {botones.map((b) => (
-        <a
-          href={b.href}
-          target={'externo' in b ? '_blank' : undefined}
-          rel={'externo' in b ? 'noopener' : undefined}
-          download={'descarga' in b ? 'CV - Stefania del Valle Alberti.pdf' : undefined}
-          class="flex items-center gap-3 rounded-2xl bg-white px-5 py-3.5 font-semibold text-tinta shadow-lg transition hover:-translate-y-1 hover:text-cafe"
-        >
-          <Icono nombre={b.icono} class="size-5 text-cafe" />
-          {b.texto}
-        </a>
-      ))}
+      <div class="mx-auto mt-10 grid max-w-lg gap-3 sm:grid-cols-2 [&>a:last-child:nth-child(odd)]:sm:col-span-2 lg:mx-0">
+        {botones.map((b) => (
+          <a
+            href={b.href}
+            target={'externo' in b ? '_blank' : undefined}
+            rel={'externo' in b ? 'noopener' : undefined}
+            download={'descarga' in b ? 'CV - Stefania del Valle Alberti.pdf' : undefined}
+            class="flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3.5 text-left font-medium ring-1 ring-white/20 backdrop-blur-sm transition hover:bg-white hover:text-tinta"
+          >
+            <span class="grid size-9 shrink-0 place-items-center rounded-full bg-white/15">
+              <Icono nombre={b.icono} class="size-[18px]" />
+            </span>
+            {b.texto}
+          </a>
+        ))}
+      </div>
     </div>
 
-    <form id="form-contacto" class="mx-auto mt-16 max-w-xl rounded-3xl bg-white/[.97] p-8 text-left text-tinta shadow-2xl sm:p-10" novalidate>
-      <h3 class="text-center font-serif text-2xl text-cafe-oscuro">Enviar mensaje</h3>
+    <form id="form-contacto" class="relative rounded-[2rem] bg-white p-7 text-left text-tinta shadow-2xl sm:p-10" novalidate data-revelar>
+      <h3 class="font-serif text-2xl text-tinta">Enviar mensaje</h3>
+      <p class="mt-1 text-sm text-texto">Te respondo a la brevedad.</p>
 
-      <label for="nombre" class="mt-6 block font-semibold">Nombre</label>
+      <label for="nombre" class="mt-6 block text-sm font-semibold">Nombre</label>
       <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required minlength="2" maxlength="80" class={campo} />
 
-      <label for="email" class="mt-4 block font-semibold">Correo electrónico</label>
+      <label for="email" class="mt-4 block text-sm font-semibold">Correo electrónico</label>
       <input id="email" name="email" type="email" placeholder="Tu correo" autocomplete="email" required maxlength="120" class={campo} />
 
-      <label for="mensaje" class="mt-4 block font-semibold">Mensaje</label>
+      <label for="mensaje" class="mt-4 block text-sm font-semibold">Mensaje</label>
       <textarea id="mensaje" name="mensaje" rows="5" placeholder="Escribí tu mensaje..." required minlength="10" maxlength="500" class={campo}></textarea>
-      <div id="contador" class="mt-1 text-right text-sm text-texto">0 / 500</div>
+      <div id="contador" class="mt-1 text-right text-xs text-texto">0 / 500</div>
 
       <!-- Honeypot: invisible para personas, los bots lo completan -->
       <div class="absolute -left-[9999px]" aria-hidden="true">
@@ -66,7 +73,7 @@ const campo =
 
       <p id="form-msg" class="mt-3 min-h-6 text-sm font-medium" role="status" aria-live="polite"></p>
 
-      <button type="submit" class="mt-2 w-full rounded-xl bg-cafe py-3.5 font-semibold text-white transition hover:bg-cafe-oscuro disabled:cursor-wait disabled:opacity-70">
+      <button type="submit" class="mt-2 w-full rounded-full bg-cafe py-3.5 font-semibold text-white shadow-lg shadow-cafe/25 transition hover:bg-cafe-oscuro disabled:cursor-wait disabled:opacity-70">
         Enviar
       </button>
     </form>

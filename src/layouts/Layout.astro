@@ -34,5 +34,23 @@ const canonica = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
   </head>
   <body class="font-sans antialiased">
     <slot />
+
+    <script>
+      // Sin JS el contenido se ve igual: .revelar solo oculta cuando este script corre
+      const observador = new IntersectionObserver(
+        (entradas) =>
+          entradas.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('visible');
+              observador.unobserve(e.target);
+            }
+          }),
+        { rootMargin: '0px 0px -10% 0px' }
+      );
+      document.querySelectorAll('[data-revelar]').forEach((el) => {
+        el.classList.add('revelar');
+        observador.observe(el);
+      });
+    </script>
   </body>
 </html>

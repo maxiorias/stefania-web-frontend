@@ -15,10 +15,14 @@ export const persona = {
     'Lic. en Psicopedagogía especializada en Derechos Humanos y Políticas Públicas de Niñez, Adolescencia y Familia.',
     'Magíster en Derechos Humanos y democratización en Latinoamérica y el Caribe.',
   ],
-  matricula: 'MP-125269',
-  ubicacion: 'Trelew, Chubut, Argentina',
+  matriculas: [
+    { numero: 'MP 345', provincia: 'Chubut' },
+    { numero: 'MP 12-5269', provincia: 'Córdoba' },
+  ],
+  ubicacion: 'Trelew y Puerto Madryn, Chubut, Argentina',
   email: 'stefaniaalbertipsp2@gmail.com',
   linkedin: 'https://www.linkedin.com/in/stefaniaalberti2/',
+  instagram: 'https://www.instagram.com/psicopedagoga.stefaniaalberti/',
   tesis: 'https://www.ciep.unsam.edu.ar/wp-content/uploads/2024/09/Tesis-destacadas-LATMA-2022-2023_-Stefania-Del-Valle-Alberti.pdf',
   cv: '/cv-stefania-alberti.pdf',
   // Número en formato internacional sin "+" ni espacios (ej. 5492804123456). Vacío = no se muestra
@@ -31,6 +35,7 @@ export const trayectoria = [
     anio: '2018',
     texto: 'Formación en Psicopedagogía con enfoque en procesos de aprendizaje, desarrollo personal y acompañamiento educativo.',
     foto: fotoLicenciatura,
+    posicion: 'center 30%',
     alt: 'Licenciatura en Psicopedagogía',
   },
   {
@@ -38,18 +43,23 @@ export const trayectoria = [
     anio: '2023',
     texto: 'Especialización en Derechos Humanos y Políticas Públicas de Niñez, Adolescencia y Familia.',
     foto: fotoMaestria,
+    posicion: 'center 35%',
     alt: 'Maestría en Derechos Humanos',
   },
   {
     titulo: 'Feria Nacional del Libro',
+    etiqueta: 'Tesis publicada',
     texto: 'Presentación de la tesis de maestría y difusión de su trabajo en el ámbito académico y social.',
     foto: fotoLibro,
+    posicion: 'center 80%',
     alt: 'Feria Nacional del Libro',
   },
   {
     titulo: 'XV Congreso Nacional de Psicopedagogía',
+    etiqueta: 'Exposición',
     texto: 'Exposición de la tesis de maestría ante colegas y profesionales del campo de la Psicopedagogía.',
     foto: fotoCongreso,
+    posicion: 'center 30%',
     alt: 'Congreso Nacional de Psicopedagogía',
   },
 ];

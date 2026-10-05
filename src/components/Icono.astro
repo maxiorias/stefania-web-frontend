@@ -1,7 +1,7 @@
 ---
 // Íconos SVG inline (reemplazan a Font Awesome por CDN)
 interface Props {
-  nombre: 'email' | 'linkedin' | 'pdf' | 'descarga' | 'whatsapp' | 'menu' | 'cerrar';
+  nombre: 'email' | 'instagram' | 'linkedin' | 'pdf' | 'descarga' | 'whatsapp' | 'menu' | 'cerrar';
   class?: string;
 }
 const { nombre, class: clase = 'size-5' } = Astro.props;
@@ -9,6 +9,7 @@ const { nombre, class: clase = 'size-5' } = Astro.props;
 
 <svg class={clase} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
   {nombre === 'email' && (<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></>)}
+  {nombre === 'instagram' && (<><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><path d="M17.5 6.5v.01" /></>)}
   {nombre === 'linkedin' && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7" /></>)}
   {nombre === 'pdf' && (<><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" /><path d="M14 3v5h5M9 13h6M9 17h4" /></>)}
   {nombre === 'descarga' && (<><path d="M12 4v11M7 10l5 5 5-5" /><path d="M5 20h14" /></>)}
