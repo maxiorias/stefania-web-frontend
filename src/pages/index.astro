@@ -46,10 +46,11 @@ const credenciales = [
           </div>
         </div>
 
-        <!-- Retrato en arco: el fondo cálido detrás y el tinte crema integran el gris frío de la foto -->
+        <!-- Retrato: marco desplazado detrás + tinte crema para integrar el gris frío de la foto -->
         <div class="relative mx-auto w-full max-w-[17rem] sm:max-w-[22rem]">
-          <div class="absolute inset-0 translate-x-3 translate-y-3 rounded-t-full sm:translate-x-4 sm:translate-y-4 rounded-b-[2rem] bg-cafe/80" aria-hidden="true"></div>
-          <div class="relative overflow-hidden rounded-t-full rounded-b-[2rem] bg-arena shadow-2xl">
+          <div class="absolute -top-4 -right-4 bottom-4 left-4 rounded-[2rem] border-2 border-cafe/40 sm:-top-5 sm:-right-5" aria-hidden="true"></div>
+          <div class="absolute -top-8 -right-8 size-28 rounded-full bg-arena/50 blur-2xl" aria-hidden="true"></div>
+          <div class="relative overflow-hidden rounded-[2rem] bg-arena shadow-2xl shadow-cafe/20">
             <Image
               src={fotoStefania}
               alt={`Lic. ${persona.nombre}`}
