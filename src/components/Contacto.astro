@@ -8,6 +8,7 @@ const fondo = await getImage({ src: fondoImg, width: 1920, format: 'webp' });
 
 const botones = [
   { href: `mailto:${persona.email}`, icono: 'email', texto: 'Email' },
+  { href: persona.instagram, icono: 'instagram', texto: 'Instagram', externo: true },
   { href: persona.linkedin, icono: 'linkedin', texto: 'LinkedIn', externo: true },
   { href: persona.tesis, icono: 'pdf', texto: 'Ver tesis de maestría', externo: true },
   { href: persona.cv, icono: 'descarga', texto: 'Descargar CV', descarga: true },
@@ -32,7 +33,7 @@ const campo =
         Podés comunicarte con <strong class="text-white">{persona.nombre}</strong> para consultas profesionales, colaboraciones o presentaciones académicas.
       </p>
 
-      <div class="mx-auto mt-10 grid max-w-lg gap-3 sm:grid-cols-2 lg:mx-0">
+      <div class="mx-auto mt-10 grid max-w-lg gap-3 sm:grid-cols-2 [&>a:last-child:nth-child(odd)]:sm:col-span-2 lg:mx-0">
         {botones.map((b) => (
           <a
             href={b.href}

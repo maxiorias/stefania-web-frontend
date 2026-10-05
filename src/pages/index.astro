@@ -13,8 +13,8 @@ const enlaceFooter = 'text-crema/70 transition-colors hover:text-white';
 const credenciales = [
   { valor: '2018', texto: 'Licenciatura en Psicopedagogía' },
   { valor: '2023', texto: 'Maestría en Derechos Humanos' },
-  { valor: persona.matricula, texto: 'Matrícula profesional' },
-  { valor: 'Trelew', texto: 'Chubut, Argentina' },
+  { valor: 'MP 345', texto: 'Matrícula en Chubut' },
+  { valor: 'Chubut', texto: 'Trelew y Puerto Madryn' },
 ];
 ---
 
@@ -30,7 +30,7 @@ const credenciales = [
         <div class="text-center md:text-left">
           <p class="inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-1.5 text-xs font-semibold tracking-widest text-cafe uppercase ring-1 ring-cafe/15">
             <span class="size-1.5 rounded-full bg-cafe"></span>
-            Mgtr. Lic. en Psicopedagogía
+            Psicopedagoga · Abordaje neurocognitivo
           </p>
           <h1 class="mt-6 font-serif text-[2.6rem] leading-[1.05] sm:text-6xl tracking-tight text-tinta lg:text-7xl">
             Stefania del Valle <em class="text-cafe">Alberti</em>
@@ -157,6 +157,9 @@ const credenciales = [
       <div>
         <h4 class="mb-3 text-xs font-semibold tracking-widest text-arena uppercase">Seguime</h4>
         <div class="flex justify-center gap-3 md:justify-start">
+          <a href={persona.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="grid size-11 place-items-center rounded-full bg-white/10 text-crema transition hover:bg-cafe">
+            <Icono nombre="instagram" class="size-5" />
+          </a>
           <a href={persona.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" class="grid size-11 place-items-center rounded-full bg-white/10 text-crema transition hover:bg-cafe">
             <Icono nombre="linkedin" class="size-5" />
           </a>

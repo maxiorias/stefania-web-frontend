@@ -15,10 +15,12 @@ export const persona = {
     'Lic. en Psicopedagogía especializada en Derechos Humanos y Políticas Públicas de Niñez, Adolescencia y Familia.',
     'Magíster en Derechos Humanos y democratización en Latinoamérica y el Caribe.',
   ],
-  matricula: 'MP-125269',
-  ubicacion: 'Trelew, Chubut, Argentina',
+  // Tal como figura en su Instagram; MP 345 es la matrícula de Chubut
+  matricula: 'MP 345 / 12-5269',
+  ubicacion: 'Trelew y Puerto Madryn, Chubut, Argentina',
   email: 'stefaniaalbertipsp2@gmail.com',
   linkedin: 'https://www.linkedin.com/in/stefaniaalberti2/',
+  instagram: 'https://www.instagram.com/psicopedagoga.stefaniaalberti/',
   tesis: 'https://www.ciep.unsam.edu.ar/wp-content/uploads/2024/09/Tesis-destacadas-LATMA-2022-2023_-Stefania-Del-Valle-Alberti.pdf',
   cv: '/cv-stefania-alberti.pdf',
   // Número en formato internacional sin "+" ni espacios (ej. 5492804123456). Vacío = no se muestra
