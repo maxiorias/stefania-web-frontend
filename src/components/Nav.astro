@@ -3,9 +3,13 @@ import { Image } from 'astro:assets';
 import icono from '../assets/logo-icono.png';
 import Icono from './Icono.astro';
 
+import { enlaceWhatsapp } from '../data/sitio';
+
 const links = [
-  { href: '#sobre-mi', texto: 'Sobre mí' },
+  { href: '#evaluaciones', texto: 'Evaluaciones' },
+  { href: '#proceso', texto: 'Proceso' },
   { href: '#servicios', texto: 'Servicios' },
+  { href: '#sobre-mi', texto: 'Sobre mí' },
   { href: '#contacto', texto: 'Contacto' },
 ];
 ---
@@ -23,17 +27,17 @@ const links = [
       </span>
     </a>
 
-    <ul class="hidden items-center gap-1 md:flex">
+    <ul class="hidden items-center gap-0.5 lg:flex">
       {links.map((l) => (
         <li>
-          <a href={l.href} data-nav-link class="rounded-full px-4 py-2 text-sm font-medium text-texto transition-colors hover:text-cafe">
+          <a href={l.href} data-nav-link class="rounded-full px-3.5 py-2 text-sm font-medium text-texto transition-colors hover:text-cafe">
             {l.texto}
           </a>
         </li>
       ))}
       <li class="ml-2">
-        <a href="#contacto" class="rounded-full bg-cafe px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cafe-oscuro">
-          Escribime
+        <a href={enlaceWhatsapp || '#contacto'} target={enlaceWhatsapp ? '_blank' : undefined} rel="noopener" class="rounded-full bg-cafe px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cafe-oscuro">
+          Pedí tu consulta
         </a>
       </li>
     </ul>
@@ -41,7 +45,7 @@ const links = [
     <button
       id="menu-boton"
       type="button"
-      class="grid size-11 place-items-center rounded-full bg-cafe text-white md:hidden"
+      class="grid size-11 place-items-center rounded-full bg-cafe text-white lg:hidden"
       aria-label="Abrir menú"
       aria-expanded="false"
       aria-controls="menu-movil"
@@ -51,7 +55,7 @@ const links = [
 
     <ul
       id="menu-movil"
-      class="absolute inset-x-0 top-full mt-2 hidden flex-col gap-1 rounded-3xl border border-white/60 bg-white/95 p-3 shadow-xl backdrop-blur-md md:hidden"
+      class="absolute inset-x-0 top-full mt-2 hidden flex-col gap-1 rounded-3xl border border-white/60 bg-white/95 p-3 shadow-xl backdrop-blur-md lg:hidden"
     >
       {links.map((l) => (
         <li>
