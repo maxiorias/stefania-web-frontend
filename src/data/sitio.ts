@@ -8,6 +8,10 @@ import fotoEvaluacion from '../assets/foto-evaluacion-neuro.png';
 import fotoDiagnostico from '../assets/foto-diagnostico.png';
 import fotoTalleres from '../assets/foto-talleres.png';
 import fotoConsultoria from '../assets/foto-consultoria.png';
+import logoOsde from '../assets/obras-sociales/osde.png';
+import logoSancor from '../assets/obras-sociales/sancor.png';
+import logoOspe from '../assets/obras-sociales/ospe.png';
+import logoSeros from '../assets/obras-sociales/seros.png';
 
 export const persona = {
   nombre: 'Stefania del Valle Alberti',
@@ -162,13 +166,12 @@ export const preguntas = [
   },
 ];
 
-// Coberturas. Para mostrar el logo oficial: dejar el archivo en src/assets/obras-sociales/
-// e importarlo en `logo` (ej. import logoOsde from '../assets/obras-sociales/osde.svg')
+// Coberturas. Sin `logo` se muestra el nombre en tipografía; los logos van en src/assets/obras-sociales/
 export const coberturas: { nombre: string; modalidad: string; logo?: ImageMetadata }[] = [
-  { nombre: 'OSDE', modalidad: 'Prestadora' },
-  { nombre: 'Sancor Salud', modalidad: 'Prestadora' },
-  { nombre: 'OSPE', modalidad: 'Prestadora' },
-  { nombre: 'SEROS', modalidad: 'Con reintegro' },
+  { nombre: 'OSDE', modalidad: 'Prestadora', logo: logoOsde },
+  { nombre: 'Sancor Salud', modalidad: 'Prestadora', logo: logoSancor },
+  { nombre: 'OSPE', modalidad: 'Prestadora', logo: logoOspe },
+  { nombre: 'SEROS', modalidad: 'Con reintegro', logo: logoSeros },
 ];
 
 export const otrasCoberturas = [

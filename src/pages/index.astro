@@ -159,7 +159,7 @@ const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
     </section>
 
     <!-- Obras sociales -->
-    <section id="obras-sociales" class="bg-white px-4 py-20 sm:px-6">
+    <section id="obras-sociales" class="bg-crema-claro px-4 py-20 sm:px-6">
       <div class={titulo} data-revelar>
         <p class={antetitulo}>Coberturas</p>
         <h2 class={h2}>Obras sociales</h2>
@@ -167,9 +167,9 @@ const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
       </div>
       <ul class="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-4">
         {coberturas.map((c) => (
-          <li class="flex flex-col items-center justify-center gap-3 rounded-3xl bg-crema-claro px-4 py-8 text-center ring-1 ring-cafe/10" data-revelar>
+          <li class="flex flex-col items-center justify-center gap-4 rounded-3xl bg-white px-4 py-7 shadow-sm text-center ring-1 ring-cafe/10" data-revelar>
             {c.logo ? (
-              <Image src={c.logo} alt={c.nombre} height={48} class="h-12 w-auto object-contain" />
+              <Image src={c.logo} alt={c.nombre} height={96} densities={[1, 2]} class="h-24 w-auto rounded-xl object-contain" />
             ) : (
               <span class="font-serif text-2xl font-semibold tracking-tight text-tinta sm:text-3xl">{c.nombre}</span>
             )}
