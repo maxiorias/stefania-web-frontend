@@ -141,7 +141,8 @@ const credenciales = [
     <div class="mx-auto grid max-w-6xl gap-10 text-center md:grid-cols-3 md:text-left">
       <div class="space-y-1.5 text-crema/70">
         <p class="font-serif text-xl text-white">{persona.nombre}</p>
-        <p>Psicopedagoga · Matrícula {persona.matricula}</p>
+        <p>Psicopedagoga</p>
+        {persona.matriculas.map((m) => <p>Matrícula {m.provincia}: {m.numero}</p>)}
         <p>{persona.ubicacion}</p>
       </div>
 

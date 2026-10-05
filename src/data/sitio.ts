@@ -15,8 +15,10 @@ export const persona = {
     'Lic. en Psicopedagogía especializada en Derechos Humanos y Políticas Públicas de Niñez, Adolescencia y Familia.',
     'Magíster en Derechos Humanos y democratización en Latinoamérica y el Caribe.',
   ],
-  // Tal como figura en su Instagram; MP 345 es la matrícula de Chubut
-  matricula: 'MP 345 / 12-5269',
+  matriculas: [
+    { numero: 'MP 345', provincia: 'Chubut' },
+    { numero: 'MP 12-5269', provincia: 'Córdoba' },
+  ],
   ubicacion: 'Trelew y Puerto Madryn, Chubut, Argentina',
   email: 'stefaniaalbertipsp2@gmail.com',
   linkedin: 'https://www.linkedin.com/in/stefaniaalberti2/',
