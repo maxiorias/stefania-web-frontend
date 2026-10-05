@@ -13,7 +13,7 @@ export const persona = {
   nombre: 'Stefania del Valle Alberti',
   titulo: 'Mgtr. Lic. Stefania del Valle Alberti',
   presentacion:
-    'Soy Licenciada en Psicopedagogía con más de 8 años de experiencia en neurorehabilitación. Trabajo desde un abordaje neurocognitivo en evaluación, diagnóstico y tratamiento, junto a la familia y la escuela.',
+    'Soy Licenciada en Psicopedagogía con más de 8 años de experiencia en neurorehabilitación. Trabajo desde un abordaje neurocognitivo en evaluación, diagnóstico y tratamiento, junto a la familia y la escuela, en Trelew y Puerto Madryn.',
   matriculas: [
     { numero: 'MP 345', provincia: 'Chubut' },
     { numero: 'MP 12-5269', provincia: 'Córdoba' },
@@ -127,5 +127,33 @@ export const trayectoria = [
     titulo: 'Especialización en Políticas Públicas en Niñez, Adolescencia y Familia',
     etiqueta: 'En curso',
     texto: 'Universidad Nacional de Entre Ríos.',
+  },
+];
+
+// Preguntas frecuentes: responden búsquedas típicas en Google con sus propios textos
+export const preguntas = [
+  {
+    pregunta: '¿Qué es una evaluación neurocognitiva?',
+    respuesta: 'Es una valoración que permite conocer el perfil de funcionamiento en cada etapa de la vida: fortalezas, desafíos y cómo inciden en el aprendizaje. Sus resultados orientan las intervenciones adecuadas.',
+  },
+  {
+    pregunta: '¿Qué evalúan las Escalas de Wechsler y desde qué edad se aplican?',
+    respuesta: 'Son una de las herramientas más reconocidas a nivel mundial para evaluar el funcionamiento intelectual. No solo dan un puntaje global: analizan comprensión verbal, razonamiento, memoria de trabajo y velocidad de procesamiento. En sus tres versiones se aplican desde los 2 hasta los 90 años.',
+  },
+  {
+    pregunta: '¿La evaluación sirve para tramitar el CUD?',
+    respuesta: 'En el marco del Certificado Único de Discapacidad, la evaluación con Escalas de Wechsler puede ser un insumo clave cuando se necesita acreditar compromiso en el funcionamiento intelectual, siempre dentro de una valoración interdisciplinaria.',
+  },
+  {
+    pregunta: '¿Cuándo conviene consultar a una psicopedagoga?',
+    respuesta: 'Si como familia o docente venís notando dificultades en el aprendizaje, la atención o la organización, es un buen momento para consultar. Consultar a tiempo es una forma de cuidado.',
+  },
+  {
+    pregunta: '¿Cómo es el proceso de evaluación y tratamiento?',
+    respuesta: 'Primero conocemos la historia de desarrollo; después hacemos la evaluación y el diagnóstico con herramientas neurocognitivas; y a partir de ahí se construye un plan de tratamiento personalizado, donde el juego cumple un rol fundamental.',
+  },
+  {
+    pregunta: '¿Dónde atendés?',
+    respuesta: 'Atiendo de manera presencial en Trelew y los jueves en Puerto Madryn, Chubut. Podés consultar por WhatsApp al 3548-565370.',
   },
 ];

@@ -6,7 +6,17 @@ import Contacto from '../components/Contacto.astro';
 import Icono from '../components/Icono.astro';
 import fotoStefania from '../assets/foto-stefania.jpg';
 import iconoLogo from '../assets/logo-icono.png';
-import { persona, enlaceWhatsapp, evaluaciones, proceso, servicios, otrosServicios, trayectoria } from '../data/sitio';
+import { persona, enlaceWhatsapp, evaluaciones, proceso, servicios, otrosServicios, trayectoria, preguntas } from '../data/sitio';
+
+const esquemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: preguntas.map((p) => ({
+    '@type': 'Question',
+    name: p.pregunta,
+    acceptedAnswer: { '@type': 'Answer', text: p.respuesta },
+  })),
+};
 
 const anio = new Date().getFullYear();
 const enlaceFooter = 'text-crema/70 transition-colors hover:text-white';
@@ -23,7 +33,7 @@ const antetitulo = 'text-xs font-semibold tracking-widest text-cafe uppercase';
 const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
 ---
 
-<Layout>
+<Layout esquemas={[esquemaFaq]}>
   <Nav />
 
   <main>
@@ -208,6 +218,25 @@ const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
       </ol>
     </section>
 
+    <!-- Preguntas frecuentes -->
+    <section id="preguntas" class="bg-crema-claro px-4 py-24 sm:px-6">
+      <div class={titulo} data-revelar>
+        <p class={antetitulo}>Preguntas frecuentes</p>
+        <h2 class={h2}>Lo que más me consultan</h2>
+      </div>
+      <div class="mx-auto mt-12 max-w-3xl space-y-3">
+        {preguntas.map((p) => (
+          <details class="group rounded-2xl bg-white px-6 py-5 ring-1 ring-cafe/10 open:shadow-md" data-revelar>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-serif text-lg text-tinta sm:text-xl [&::-webkit-details-marker]:hidden">
+              {p.pregunta}
+              <span class="grid size-8 shrink-0 place-items-center rounded-full bg-crema text-cafe transition group-open:rotate-45" aria-hidden="true">+</span>
+            </summary>
+            <p class="mt-3 leading-relaxed text-texto">{p.respuesta}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
     <Contacto />
   </main>
 
@@ -225,6 +254,7 @@ const h2 = 'mt-3 font-serif text-4xl text-tinta sm:text-5xl';
         <div class="flex flex-col gap-2">
           <a href="#evaluaciones" class={enlaceFooter}>Evaluaciones</a>
           <a href="#servicios" class={enlaceFooter}>Servicios</a>
+          <a href="#preguntas" class={enlaceFooter}>Preguntas frecuentes</a>
           <a href={`mailto:${persona.email}`} class={enlaceFooter}>Consultas por email</a>
           {persona.telefono && <a href={enlaceWhatsapp} target="_blank" rel="noopener" class={enlaceFooter}>WhatsApp {persona.telefono}</a>}
         </div>
