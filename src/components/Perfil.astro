@@ -1,0 +1,28 @@
+---
+// Línea de perfil como la de un informe de evaluación (puntajes escalares 1–19, media 10).
+// Es decorativa: se dibuja sola al cargar y queda detrás del contenido.
+interface Props {
+  class?: string;
+}
+const { class: clase = '' } = Astro.props;
+
+const valores = [9, 12, 8, 13, 11, 7, 10, 14, 11, 9];
+const ancho = 1200;
+const alto = 240;
+const margen = 40;
+const paso = (ancho - margen * 2) / (valores.length - 1);
+const y = (v: number) => 20 + ((19 - v) * (alto - 40)) / 18;
+const puntos = valores.map((v, i) => [margen + i * paso, y(v)]);
+const linea = puntos.map(([px, py], i) => `${i ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join(' ');
+---
+
+<svg class={clase} viewBox={`0 0 ${ancho} ${alto}`} aria-hidden="true">
+  <!-- Franja del promedio (±1 desvío) -->
+  <rect x="0" y={y(13)} width={ancho} height={y(7) - y(13)} class="fill-arena/25" />
+  <line x1="0" x2={ancho} y1={y(10)} y2={y(10)} class="stroke-cafe/25" stroke-dasharray="2 6" />
+  {puntos.map(([px]) => <line x1={px} x2={px} y1="10" y2={alto - 10} class="stroke-cafe/15" stroke-dasharray="1 5" />)}
+  <path d={linea} fill="none" class="trazo stroke-cafe/70" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" style="--largo: 2600; --demora: .3s" />
+  {puntos.map(([px, py], i) => (
+    <circle cx={px} cy={py} r="4.5" class="punto-perfil fill-crema stroke-cafe" stroke-width="2" vector-effect="non-scaling-stroke" style={`--demora: ${(0.4 + i * 0.2).toFixed(2)}s`} />
+  ))}
+</svg>
